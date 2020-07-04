@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+    <ColumnConstraints hgrow="SOMETIMES" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="50.0" />
+    <ColumnConstraints hgrow="SOMETIMES" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <TableView GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columns>
+          <TableColumn prefWidth="54.99998474121094" text="Stranka" />
+          <TableColumn prefWidth="95.0" text="Kandidat" />
+            <TableColumn prefWidth="77.0" text="Broj glasova" />
+            <TableColumn prefWidth="74.0" text="Pozicija" />
+        </columns>
+      </TableView>
+      <TableView GridPane.columnIndex="3" GridPane.rowIndex="1">
+        <columns>
+          <TableColumn prefWidth="105.0" text="Broj lične karte" />
+          <TableColumn prefWidth="143.0" text="JMBG" />
+        </columns>
+      </TableView>
+      <Label text="Kandidati" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets left="126.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Ljudi koji su glasali" GridPane.columnIndex="3">
+         <GridPane.margin>
+            <Insets left="75.0" />
+         </GridPane.margin>
+      </Label>
+   </children>
+</GridPane>
