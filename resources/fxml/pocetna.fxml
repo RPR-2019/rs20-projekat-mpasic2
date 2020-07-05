@@ -6,23 +6,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.PocetnaController">
     <stylesheets>
         <URL value="@/css/edit.css" />
     </stylesheets>
     <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="true" text="_Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="true" onAction="#helpProzor" text="_Contact Admin" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
    </top>
    <center>
-      <GridPane fx:id="glavniGrid" BorderPane.alignment="CENTER">
+      <GridPane fx:id="mainGridLogin" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -82,7 +82,7 @@
                            <Insets left="110.0" right="30.0" />
                        </GridPane.margin>
                    </TextField>
-                  <Button fx:id="AdminDugme" mnemonicParsing="false" text="Prijava" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Button mnemonicParsing="false" text="Prijava" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="120.0" />
                      </GridPane.margin>
@@ -143,7 +143,7 @@
                         <Insets left="110.0" right="30.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button fx:id="GlasacDugme" mnemonicParsing="false" text="Prijava" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Button mnemonicParsing="false" text="Prijava" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="120.0" />
                      </GridPane.margin>

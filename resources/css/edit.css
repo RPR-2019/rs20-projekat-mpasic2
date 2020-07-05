@@ -1,7 +1,16 @@
-#glavniGrid{
+#mainGridLogin{
     -fx-background-image: url("/img/pozadi.jpg");
-
     -fx-font-size: 13px;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+#mainGridAdmin{
+    -fx-background-image: url("/img/pozadi.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+#voteGrid{
+    -fx-background-image: url("/img/pozadi.jpg");
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
