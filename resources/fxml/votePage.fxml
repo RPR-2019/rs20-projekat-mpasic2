@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:id="voteGrid" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="voteGrid" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.VotePageController">
     <stylesheets>
         <URL value="@/css/edit.css" />
     </stylesheets>
@@ -83,11 +83,12 @@
            <font>
                <Font name="System Bold" size="12.0" />
            </font></Label>
-      <Button mnemonicParsing="false" text="Spasi moj izbor" GridPane.columnIndex="2" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets left="76.0" />
-         </GridPane.margin>
-      </Button>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+        <buttons>
+          <Button mnemonicParsing="false" text="Sačuvaj" translateX="-40.0" />
+            <Button fx:id="votePageBack" mnemonicParsing="false" onAction="#votePageBackAction" text="Povratak" translateX="-40.0" />
+        </buttons>
+      </ButtonBar>
 
    </children>
 </GridPane>

@@ -78,6 +78,9 @@ public class MainPageController {
             Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             noviProzor.setScene(scene);
             noviProzor.show();
+
+            Stage zatvaranjePoruka=(Stage)adminName.getScene().getWindow();
+            zatvaranjePoruka.close();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -87,6 +90,7 @@ public class MainPageController {
 
             alert.showAndWait();
         }
+
 
     }
 
@@ -111,6 +115,9 @@ public class MainPageController {
             Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             noviProzor.setScene(scene);
             noviProzor.show();
+
+            Stage zatvaranjePoruka=(Stage)adminName.getScene().getWindow();
+            zatvaranjePoruka.close();
         }
 
         else{
