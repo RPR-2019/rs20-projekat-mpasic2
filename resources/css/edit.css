@@ -14,3 +14,14 @@
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
+#buttonBarPhoto{
+    -fx-background-image: url("/img/bluePhoto.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+.poljeIspravno {
+    -fx-control-inner-background: greenyellow;
+}
+.poljeNijeIspravno {
+    -fx-control-inner-background: lightpink;
+}

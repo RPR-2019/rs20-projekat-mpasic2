@@ -1,4 +1,4 @@
 package ba.unsa.etf.rs.projekat;
 
-public class Pocetna {
+public class MainPage {
 }

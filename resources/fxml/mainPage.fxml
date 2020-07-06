@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.PocetnaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.MainPageController">
     <stylesheets>
         <URL value="@/css/edit.css" />
     </stylesheets>
     <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="true" text="_Help">
+          <Menu mnemonicParsing="true" text="_Pomoc">
             <items>
-              <MenuItem mnemonicParsing="true" onAction="#helpProzor" text="_Contact Admin" />
+              <MenuItem mnemonicParsing="true" onAction="#helpProzor" text="_Kontakt" />
             </items>
           </Menu>
         </menus>
@@ -57,34 +57,34 @@
                   </Label>
                    <Label text="Korisničko ime:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                        <GridPane.margin>
-                           <Insets left="12.0" />
+                           <Insets left="27.0" />
                        </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                    </Label>
-                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                   <TextField fx:id="adminName" GridPane.columnIndex="1" GridPane.rowIndex="2">
                        <GridPane.margin>
-                           <Insets left="110.0" right="30.0" />
+                           <Insets left="125.0" right="20.0" />
                        </GridPane.margin>
                    </TextField>
 
                    <Label text="Lozinka:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                        <GridPane.margin>
-                           <Insets left="12.0" />
+                           <Insets left="27.0" />
                        </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                    </Label>
-                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                   <PasswordField fx:id="adminPassword" GridPane.columnIndex="1" GridPane.rowIndex="3">
                        <GridPane.margin>
-                           <Insets left="110.0" right="30.0" />
+                           <Insets left="125.0" right="20.0" />
                        </GridPane.margin>
-                   </TextField>
-                  <Button mnemonicParsing="false" text="Prijava" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                   </PasswordField>
+                  <Button fx:id="loginAdmin" mnemonicParsing="false" onAction="#loginAdminButton" text="Prijava" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
-                        <Insets left="120.0" />
+                        <Insets left="125.0" />
                      </GridPane.margin>
                   </Button>
 
@@ -119,33 +119,33 @@
                   </Label>
                   <Label text="Broj lične karte:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
-                        <Insets left="10.0" />
+                        <Insets left="15.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="userNumber" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
-                        <Insets left="110.0" right="30.0" />
+                        <Insets left="115.0" right="30.0" />
                      </GridPane.margin>
                   </TextField>
                   <Label text="JMBG:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
-                        <Insets left="10.0" />
+                        <Insets left="15.0" />
                      </GridPane.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="userJMBG" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
-                        <Insets left="110.0" right="30.0" />
+                        <Insets left="115.0" right="30.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" text="Prijava" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Button fx:id="LoginUser" mnemonicParsing="false" onAction="#loginUserButton" text="Prijava" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
-                        <Insets left="120.0" />
+                        <Insets left="130.0" />
                      </GridPane.margin>
                   </Button>
                </children>
@@ -156,4 +156,14 @@
          </children>
       </GridPane>
    </center>
+   <bottom>
+      <ButtonBar fx:id="buttonBarPhoto" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <buttons>
+          <Button fx:id="closeMainPage" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#closeMainPageButton" text="Zatvori" translateX="-270.0" />
+        </buttons>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ButtonBar>
+   </bottom>
 </BorderPane>
