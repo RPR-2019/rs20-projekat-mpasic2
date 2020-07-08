@@ -15,6 +15,12 @@ import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 public class AdministratorController {
 
     public GridPane mainGridAdmin;
+    public VotingDAO baza;
+
+    /*public AdministratorController() {
+        baza = VotingDAO.getInstance();
+        Admin = new Admin();
+    }*/
 
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
 

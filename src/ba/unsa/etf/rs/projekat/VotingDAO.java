@@ -7,25 +7,22 @@ import java.sql.*;
 
 public class VotingDAO {
 
-    private static VotingDAO instance;
+   // private static VotingDAO instance;
     private Connection connection;
-    private PreparedStatement findAdminQuery,findUserCardNumberQuery,findUserJMBGQuery;
+    private PreparedStatement findAdminQuery,addNewUserQuery,findUserJMBGQuery;
 
 
-    private VotingDAO() {
+    public VotingDAO() {
 
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:el_baza.db");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
         try {
+            connection = DriverManager.getConnection("jdbc:sqlite:baza.db");
             //findAdminMailQuery = connection.prepareStatement("SELECT * FROM ADMIN WHERE e_mail = ?");
             //findAdminPasswordQuery = connection.prepareStatement("SELECT * FROM ADMIN WHERE password = ?");
-            findAdminQuery = connection.prepareStatement("SELECT * FROM ADMIN;");
-            findUserCardNumberQuery = connection.prepareStatement("SELECT * FROM VOTERS WHERE card_number = ?");
-            findUserJMBGQuery = connection.prepareStatement("SELECT * FROM VOTERS WHERE jmbg = ?");
+            findAdminQuery = connection.prepareStatement("SELECT * FROM admin;");
+            addNewUserQuery = connection.prepareStatement("INSERT INTO voters VALUES (?,?,?)");
+            findUserJMBGQuery = connection.prepareStatement("SELECT * FROM voters WHERE jmbg = ?");
 
 
 
@@ -48,6 +45,8 @@ public class VotingDAO {
             }
         }*/
     }
+
+
 
     public ObservableList<Admin> getAdmin(){
         ObservableList<Admin> administratori = FXCollections.observableArrayList();

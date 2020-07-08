@@ -29,7 +29,7 @@ public class MainPageController {
     public TextField userNumber;
     public TextField userJMBG;
     public Button closeMainPage;
-    private VotingDAO baza;
+    VotingDAO baza = new VotingDAO();
 
     public void helpProzor(ActionEvent actionEvent) throws IOException {
         Stage noviProzor = new Stage();
@@ -54,8 +54,8 @@ public class MainPageController {
     public void loginAdminButton(ActionEvent actionEvent) throws IOException {
         //ObservableList<Admin> administratori = baza.getAdmin();
         boolean daLiTrebaOtvoriti=true;
-
-
+        //System.out.println(baza.getAdmin().get(0).getE_mail());
+        System.out.println(baza.getAdmin().size());
 
         if (!adminName.getText().isEmpty() && adminName.getText().equals(baza.getAdmin().get(0).getE_mail())) {
             adminName.getStyleClass().removeAll("poljeNijeIspravno");
