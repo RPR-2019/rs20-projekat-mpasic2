@@ -1,15 +1,15 @@
 package ba.unsa.etf.rs.projekat;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 
 public class VotingDAO {
 
     private static VotingDAO instance;
     private Connection connection;
-    private PreparedStatement findAdminMailQuery,findAdminPasswordQuery,findUserCardNumberQuery,findUserJMBGQuery;
+    private PreparedStatement findAdminQuery,findUserCardNumberQuery,findUserJMBGQuery;
 
 
     private VotingDAO() {
@@ -21,10 +21,13 @@ public class VotingDAO {
         }
 
         try {
-            findAdminMailQuery = connection.prepareStatement("SELECT * FROM ADMIN WHERE e_mail = ?");
-            findAdminPasswordQuery = connection.prepareStatement("SELECT * FROM ADMIN WHERE password = ?");
+            //findAdminMailQuery = connection.prepareStatement("SELECT * FROM ADMIN WHERE e_mail = ?");
+            //findAdminPasswordQuery = connection.prepareStatement("SELECT * FROM ADMIN WHERE password = ?");
+            findAdminQuery = connection.prepareStatement("SELECT * FROM ADMIN;");
             findUserCardNumberQuery = connection.prepareStatement("SELECT * FROM VOTERS WHERE card_number = ?");
             findUserJMBGQuery = connection.prepareStatement("SELECT * FROM VOTERS WHERE jmbg = ?");
+
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,6 +49,20 @@ public class VotingDAO {
         }*/
     }
 
+    public ObservableList<Admin> getAdmin(){
+        ObservableList<Admin> administratori = FXCollections.observableArrayList();
 
+        try {
+            ResultSet rs = findAdminQuery.executeQuery();
+
+            while(rs.next()) {
+                Admin noviAdmin = new Admin(rs.getInt(1),rs.getString(2),rs.getString(3));
+                administratori.add(noviAdmin);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return administratori;
+    }
 
 }

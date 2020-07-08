@@ -1,5 +1,6 @@
 package ba.unsa.etf.rs.projekat;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,6 +29,7 @@ public class MainPageController {
     public TextField userNumber;
     public TextField userJMBG;
     public Button closeMainPage;
+    private VotingDAO baza;
 
     public void helpProzor(ActionEvent actionEvent) throws IOException {
         Stage noviProzor = new Stage();
@@ -50,9 +52,12 @@ public class MainPageController {
 
 
     public void loginAdminButton(ActionEvent actionEvent) throws IOException {
+        //ObservableList<Admin> administratori = baza.getAdmin();
         boolean daLiTrebaOtvoriti=true;
 
-        if (!adminName.getText().isEmpty() && valjalMail(adminName.getText())) {
+
+
+        if (!adminName.getText().isEmpty() && adminName.getText().equals(baza.getAdmin().get(0).getE_mail())) {
             adminName.getStyleClass().removeAll("poljeNijeIspravno");
             adminName.getStyleClass().add("poljeIspravno");
         } else {
@@ -61,7 +66,7 @@ public class MainPageController {
             daLiTrebaOtvoriti=false;
         }
 
-        if(adminPassword.getText().isEmpty()){
+        if(adminPassword.getText().isEmpty() || !adminPassword.getText().equals(baza.getAdmin().get(0).getPassword())){
             adminPassword.getStyleClass().removeAll("poljeIspravno");
             adminPassword.getStyleClass().add("poljeNijeIspravno");
             daLiTrebaOtvoriti=false;

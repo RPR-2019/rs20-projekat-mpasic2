@@ -27,6 +27,7 @@ public class AdministratorController {
 
         Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
         zatvaranjePoruka.close();
+
     }
 
 }
