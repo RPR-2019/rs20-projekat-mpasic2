@@ -23,18 +23,18 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TableView GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TableView fx:id="tblCandidats" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columns>
-          <TableColumn prefWidth="54.99998474121094" text="Stranka" />
-          <TableColumn prefWidth="95.0" text="Kandidat" />
-            <TableColumn prefWidth="77.0" text="Broj glasova" />
-            <TableColumn prefWidth="74.0" text="Pozicija" />
+          <TableColumn fx:id="colParty" prefWidth="54.99998474121094" text="Stranka" />
+          <TableColumn fx:id="colCandidats" prefWidth="95.0" text="Kandidat" />
+            <TableColumn fx:id="colNumberVote" prefWidth="77.0" text="Broj glasova" />
+            <TableColumn fx:id="colFunction" prefWidth="76.0" text="Pozicija" />
         </columns>
       </TableView>
-      <TableView GridPane.columnIndex="3" GridPane.rowIndex="1">
+      <TableView fx:id="tblVoters" GridPane.columnIndex="3" GridPane.rowIndex="1">
         <columns>
-          <TableColumn prefWidth="105.0" text="Broj lične karte" />
-          <TableColumn prefWidth="143.0" text="JMBG" />
+          <TableColumn fx:id="colUserNumber" prefWidth="105.0" text="Broj lične karte" />
+          <TableColumn fx:id="colJMBG" prefWidth="145.0" text="JMBG" />
         </columns>
       </TableView>
       <Label text="KANDIDATI" textFill="WHITE" GridPane.columnIndex="1">
