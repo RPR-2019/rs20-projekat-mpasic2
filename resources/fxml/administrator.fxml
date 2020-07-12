@@ -25,10 +25,10 @@
    <children>
       <TableView fx:id="tblCandidats" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columns>
-          <TableColumn fx:id="colParty" prefWidth="54.99998474121094" text="Stranka" />
-          <TableColumn fx:id="colCandidats" prefWidth="95.0" text="Kandidat" />
-            <TableColumn fx:id="colNumberVote" prefWidth="77.0" text="Broj glasova" />
-            <TableColumn fx:id="colFunction" prefWidth="76.0" text="Pozicija" />
+          <TableColumn fx:id="colParty" minWidth="-1.0" prefWidth="49.0" text="Stranka" />
+          <TableColumn fx:id="colCandidats" minWidth="-1.0" prefWidth="120.0" text="Kandidat" />
+            <TableColumn fx:id="colNumberVote" minWidth="-1.0" prefWidth="46.0" text="Glasovi" />
+            <TableColumn fx:id="colFunction" minWidth="-1.0" prefWidth="88.0" text="Pozicija" />
         </columns>
       </TableView>
       <TableView fx:id="tblVoters" GridPane.columnIndex="3" GridPane.rowIndex="1">

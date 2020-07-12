@@ -16,15 +16,15 @@ public class Candidats {
     SimpleObjectProperty<Functions> functions;
     SimpleIntegerProperty vote_number;
 
-    public Candidats(SimpleIntegerProperty id, SimpleObjectProperty<Party> party_id, SimpleStringProperty name, SimpleStringProperty lastname, SimpleObjectProperty<LocalDate> birth_date, SimpleStringProperty living_place, SimpleObjectProperty<Functions> functions, SimpleIntegerProperty vote_number) {
-        this.id = id;
-        this.party_id = party_id;
-        this.name = name;
-        this.lastname = lastname;
-        this.birth_date = birth_date;
-        this.living_place = living_place;
-        this.functions = functions;
-        this.vote_number = vote_number;
+    public Candidats(int id, Party party_id, String name, String lastname, LocalDate birth_date, String living_place, Functions functions, int vote_number) {
+        this.id = new SimpleIntegerProperty(id);
+        this.party_id = new SimpleObjectProperty<Party>(party_id);
+        this.name = new SimpleStringProperty(name);
+        this.lastname = new SimpleStringProperty(lastname);
+        this.birth_date = new SimpleObjectProperty<LocalDate>(birth_date);
+        this.living_place = new SimpleStringProperty(living_place);
+        this.functions = new SimpleObjectProperty<Functions>(functions);
+        this.vote_number = new SimpleIntegerProperty(vote_number);
     }
 
     public int getId() {

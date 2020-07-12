@@ -7,9 +7,9 @@ public class Party {
     SimpleIntegerProperty id;
     SimpleStringProperty name_party;
 
-    public Party(SimpleIntegerProperty id, SimpleStringProperty name_party) {
-        this.id = id;
-        this.name_party = name_party;
+    public Party(int id, String name_party) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name_party = new SimpleStringProperty(name_party);
     }
 
     public int getId() {

@@ -7,9 +7,9 @@ public class Functions {
     SimpleIntegerProperty id;
     SimpleStringProperty function_name;
 
-    public Functions(SimpleIntegerProperty id, SimpleStringProperty function_name) {
-        this.id = id;
-        this.function_name = function_name;
+    public Functions(int id, String function_name) {
+        this.id = new SimpleIntegerProperty(id);
+        this.function_name = new SimpleStringProperty(function_name);
     }
 
     public int getId() {

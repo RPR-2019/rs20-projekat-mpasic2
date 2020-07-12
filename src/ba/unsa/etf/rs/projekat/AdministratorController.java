@@ -1,9 +1,12 @@
 package ba.unsa.etf.rs.projekat;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -20,7 +23,7 @@ import java.util.ResourceBundle;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
-public class AdministratorController {
+public class AdministratorController implements Initializable {
 
     public GridPane mainGridAdmin;
     public TableView<Candidats> tblCandidats;
@@ -32,7 +35,7 @@ public class AdministratorController {
     public TableView<Voters> tblVoters;
     public TableColumn<Candidats,String> colUserNumber;
     public TableColumn<Candidats,String> colJMBG;
-    public VotingDAO baza;
+    public VotingDAO baza = new VotingDAO();
 
     /*public AdministratorController() {
         baza = VotingDAO.getInstance();
@@ -44,13 +47,22 @@ public class AdministratorController {
 
         colGradDrzava.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDrzava().getNaziv()));
         colName.setCellValueFactory(cellData -> Bindings.createStringBinding(() -> cellData.getValue().getName()+" "+cellData.getValue().getSurname()));
-    */
-    //@Override
+*/
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colParty.setCellValueFactory(data -> (ObservableValue<String>) new PropertyValueFactory(data.getValue().getParty_id().getName_party()));
+        tblCandidats.setItems(baza.getCandidats());
+        //colMan.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getManufacturer().getName()));
+        colParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getParty_id().getName_party()));
+        //colParty.setCellValueFactory(data -> (ObservableValue<String>) new PropertyValueFactory(data.getValue().getParty_id().getName_party()));
         colCandidats.setCellValueFactory(cellData -> Bindings.createStringBinding(() -> cellData.getValue().getName()+" "+cellData.getValue().getLastname()));
         colNumberVote.setCellValueFactory(new PropertyValueFactory<>("vote_number"));
-        colFunction.setCellValueFactory(data -> (ObservableValue<String>) new PropertyValueFactory(data.getValue().getFunctions().getFunction_name()));
+        //colFunction.setCellValueFactory(data -> (ObservableValue<String>) new PropertyValueFactory(data.getValue().getFunctions().getFunction_name()));
+        colFunction.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFunctions().getFunction_name()));
+
+
+        tblVoters.setItems(baza.getUsers());
+        colUserNumber.setCellValueFactory(new PropertyValueFactory<>("card_number"));
+        colJMBG.setCellValueFactory(new PropertyValueFactory<>("jmbg"));
     }
 
 
