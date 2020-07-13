@@ -212,8 +212,10 @@ public class VotingDAO {
 
     public void setNewPassword(String email, String newPassword){
         try {
-            newPasswordQuery.setString(1,email);
-            newPasswordQuery.setString(2,newPassword);
+            newPasswordQuery.setString(2,email);
+            newPasswordQuery.setString(1,newPassword);
+
+
             newPasswordQuery.execute();
 
         } catch (SQLException e) {

@@ -25,3 +25,8 @@
 .poljeNijeIspravno {
     -fx-control-inner-background: lightpink;
 }
+#gridNewPassword{
+    -fx-background-image: url("/img/bluePhoto.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}

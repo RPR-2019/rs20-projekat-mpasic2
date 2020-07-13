@@ -165,7 +165,7 @@
    <bottom>
       <ButtonBar fx:id="buttonBarPhoto" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
-          <Button fx:id="closeMainPage" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#closeMainPageButton" text="Zatvori" translateX="-270.0" />
+          <Button fx:id="closeMainPage" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#closeMainPageButton" text="Zatvori" translateX="-267.0" />
         </buttons>
          <opaqueInsets>
             <Insets />

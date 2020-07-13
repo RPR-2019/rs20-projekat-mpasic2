@@ -1,6 +1,7 @@
 package ba.unsa.etf.rs.projekat;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -12,8 +13,23 @@ public class newPasswordController {
     public TextField emailAdmin;
 
     public void newPasswordAction(ActionEvent actionEvent) {
-        if(newPasswordOne==newPasswordTwo){
+        if(newPasswordOne.getText().equals(newPasswordTwo.getText())){
             baza.setNewPassword(emailAdmin.getText(),newPasswordOne.getText());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Succesufon");
+            alert.setHeaderText("Uspjesno");
+            alert.setContentText("Uspjesno promjenjena lozinka!");
+
+            alert.showAndWait();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom promjene lozinke");
+            alert.setContentText("Neispravni podaci!");
+
+            alert.showAndWait();
         }
     }
 

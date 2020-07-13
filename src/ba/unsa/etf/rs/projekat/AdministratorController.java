@@ -91,4 +91,22 @@ public class AdministratorController implements Initializable {
         Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
         zatvaranjePoruka.close();
     }
+
+    public void helpOnAction(ActionEvent actionEvent) throws IOException {
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/help.fxml"));
+        noviProzor.setTitle("Kontakt centar");
+        Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
+    }
+
+    public void newPasswordAction(ActionEvent actionEvent) throws IOException {
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/newPassword.fxml"));
+        noviProzor.setTitle("Promjena lozinke");
+        Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
+    }
 }
