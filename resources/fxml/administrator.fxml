@@ -69,17 +69,18 @@
         <menus>
           <Menu mnemonicParsing="false" text="_File">
             <items>
-              <MenuItem mnemonicParsing="false" text="_Back" onAction="#backButtonAction"/>
+              <MenuItem mnemonicParsing="false" onAction="#backButtonAction" text="_Back" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="_Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Change Password" onAction="#newPasswordAction"/>
+              <MenuItem mnemonicParsing="false" onAction="#newPasswordAction" text="Change Password" />
+                  <MenuItem mnemonicParsing="false" onAction="#newAdminAction" text="Add Admin" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="_Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="_Kontakt" onAction="#helpOnAction"/>
+              <MenuItem mnemonicParsing="false" onAction="#helpOnAction" text="_Kontakt" />
             </items>
           </Menu>
         </menus>

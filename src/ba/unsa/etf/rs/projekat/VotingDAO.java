@@ -9,7 +9,8 @@ public class VotingDAO {
 
    // private static VotingDAO instance;
     private Connection connection;
-    private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery;
+    private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,
+            addNewAdmin,adminNewQuery;
 
 
     public VotingDAO() {
@@ -29,8 +30,8 @@ public class VotingDAO {
             getAllFunctions = connection.prepareStatement("SELECT * FROM functions");
             QueryAllVotersNumber = connection.prepareStatement("SELECT COUNT(*) FROM voters");
             newPasswordQuery = connection.prepareStatement("UPDATE admin SET password = ? WHERE e_mail = ?");
-
-
+            addNewAdmin = connection.prepareStatement("INSERT INTO admin VALUES(?,?,?);");
+            adminNewQuery = connection.prepareStatement("Select MAX(id)+1 from admin; ");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -217,6 +218,28 @@ public class VotingDAO {
 
 
             newPasswordQuery.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void addAdmin(Admin ad){
+
+        try {
+            ResultSet rs = adminNewQuery.executeQuery();
+
+            if (rs.next())
+                ad.setId(rs.getInt(1));
+            else
+                ad.setId(1);
+
+            addNewAdmin.setInt(1,ad.getId());
+            addNewAdmin.setString(2,ad.getE_mail());
+            addNewAdmin.setString(3,ad.getPassword());
+
+            addNewAdmin.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();

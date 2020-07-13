@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class newPasswordController {
     public PasswordField newPasswordOne;
@@ -16,12 +17,15 @@ public class newPasswordController {
         if(newPasswordOne.getText().equals(newPasswordTwo.getText())){
             baza.setNewPassword(emailAdmin.getText(),newPasswordOne.getText());
 
+
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Succesufon");
             alert.setHeaderText("Uspjesno");
             alert.setContentText("Uspjesno promjenjena lozinka!");
 
             alert.showAndWait();
+
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -31,6 +35,10 @@ public class newPasswordController {
 
             alert.showAndWait();
         }
+
+        Stage zatvaranjePoruka = (Stage) newPasswordOne.getScene().getWindow();
+        zatvaranjePoruka.close();
+
     }
 
 

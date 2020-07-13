@@ -109,4 +109,13 @@ public class AdministratorController implements Initializable {
         noviProzor.setScene(scene);
         noviProzor.show();
     }
+
+    public void newAdminAction(ActionEvent actionEvent) throws IOException {
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/newAdmin.fxml"));
+        noviProzor.setTitle("Promjena lozinke");
+        Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
+    }
 }

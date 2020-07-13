@@ -44,7 +44,7 @@ public class MainPageController {
         noviProzor.show();
     }
 
-    //adminName.textProperty().addListener((obs, oldIme, newIme) -> { });
+    /*adminName.textProperty().addListener((obs, oldIme, newIme) -> { });
     public boolean valjalMail(String email) {
         Character ludoA = '@';
         for(int i=0;i<adminName.getLength();i++){
@@ -52,46 +52,30 @@ public class MainPageController {
                 return true;
         }
         return false;
-    }
+    }*/
 
 
     public void loginAdminButton(ActionEvent actionEvent) throws IOException {
-        //ObservableList<Admin> administratori = baza.getAdmin();
-        boolean daLiTrebaOtvoriti=true;
-        //System.out.println(baza.getAdmin().get(0).getE_mail());
-        //System.out.println(baza.getAdmin().size());
+        boolean alertProzor=false;
 
-        if (!adminName.getText().isEmpty() && adminName.getText().equals(baza.getAdmin().get(1).getE_mail())) {
-            adminName.getStyleClass().removeAll("poljeNijeIspravno");
-            adminName.getStyleClass().add("poljeIspravno");
-        } else {
-            adminName.getStyleClass().removeAll("poljeIspravno");
-            adminName.getStyleClass().add("poljeNijeIspravno");
-            daLiTrebaOtvoriti=false;
+        for(int i=0;i<baza.getAdmin().size();i++){
+            if(adminName.getText().equals(baza.getAdmin().get(i).getE_mail()) && adminPassword.getText().equals(baza.getAdmin().get(i).getPassword())) {
+                Stage noviProzor = new Stage();
+                Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
+                noviProzor.setTitle("Dobrodosao " + adminName.getText());
+                Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+                noviProzor.setScene(scene);
+                noviProzor.show();
+
+                Stage zatvaranjePoruka = (Stage) adminName.getScene().getWindow();
+                zatvaranjePoruka.close();
+                alertProzor=true;
+            }
+
+
         }
 
-        if(adminPassword.getText().isEmpty() || !adminPassword.getText().equals(baza.getAdmin().get(1).getPassword())){
-            adminPassword.getStyleClass().removeAll("poljeIspravno");
-            adminPassword.getStyleClass().add("poljeNijeIspravno");
-            daLiTrebaOtvoriti=false;
-        } else {
-            adminPassword.getStyleClass().removeAll("poljeNijeIspravno");
-            adminPassword.getStyleClass().add("poljeIspravno");
-        }
-
-
-        if(daLiTrebaOtvoriti) {
-            Stage noviProzor = new Stage();
-            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
-            noviProzor.setTitle("Informacije o glasanju");
-            Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            noviProzor.setScene(scene);
-            noviProzor.show();
-
-            Stage zatvaranjePoruka=(Stage)adminName.getScene().getWindow();
-            zatvaranjePoruka.close();
-        }
-        else{
+        if(!alertProzor){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Greška prilikom registracije");
