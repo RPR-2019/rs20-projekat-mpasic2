@@ -6,57 +6,83 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:id="mainGridAdmin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.AdministratorController">
-    <stylesheets>
-        <URL value="@/css/edit.css" />
-    </stylesheets>
-    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
-    <ColumnConstraints hgrow="SOMETIMES" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="50.0" />
-    <ColumnConstraints hgrow="SOMETIMES" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <TableView fx:id="tblCandidats" GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <columns>
-          <TableColumn fx:id="colParty" minWidth="-1.0" prefWidth="49.0" text="Stranka" />
-          <TableColumn fx:id="colCandidats" minWidth="-1.0" prefWidth="120.0" text="Kandidat" />
-            <TableColumn fx:id="colNumberVote" minWidth="-1.0" prefWidth="46.0" text="Glasovi" />
-            <TableColumn fx:id="colFunction" minWidth="-1.0" prefWidth="88.0" text="Pozicija" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tblVoters" GridPane.columnIndex="3" GridPane.rowIndex="1">
-        <columns>
-          <TableColumn fx:id="colUserNumber" prefWidth="105.0" text="Broj lične karte" />
-          <TableColumn fx:id="colJMBG" prefWidth="145.0" text="JMBG" />
-        </columns>
-      </TableView>
-      <Label text="KANDIDATI" textFill="WHITE" GridPane.columnIndex="1">
-         <GridPane.margin>
-            <Insets left="120.0" />
-         </GridPane.margin>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label text="GLASAČI" textFill="WHITE" GridPane.columnIndex="3">
-         <GridPane.margin>
-            <Insets left="101.0" />
-         </GridPane.margin>
-          <font>
-              <Font name="System Bold" size="12.0" />
-          </font>
-      </Label>
-      <Button mnemonicParsing="false" onAction="#backButtonAction" text="Povratak" GridPane.columnIndex="3" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets left="189.0" />
-         </GridPane.margin>
-      </Button>
-   </children>
-</GridPane>
+<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.AdministratorController">
+   <center>
+      <GridPane fx:id="mainGridAdmin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+          <stylesheets>
+              <URL value="@/css/edit.css" />
+          </stylesheets>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView fx:id="tblCandidats" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn fx:id="colParty" minWidth="-1.0" prefWidth="49.0" text="Stranka" />
+                <TableColumn fx:id="colCandidats" minWidth="-1.0" prefWidth="120.0" text="Kandidat" />
+                  <TableColumn fx:id="colNumberVote" minWidth="-1.0" prefWidth="46.0" text="Glasovi" />
+                  <TableColumn fx:id="colFunction" minWidth="-1.0" prefWidth="88.0" text="Pozicija" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tblVoters" GridPane.columnIndex="3" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn fx:id="colUserNumber" prefWidth="105.0" text="Broj lične karte" />
+                <TableColumn fx:id="colJMBG" prefWidth="145.0" text="JMBG" />
+              </columns>
+            </TableView>
+            <Label text="KANDIDATI" textFill="WHITE" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="120.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="GLASAČI" textFill="WHITE" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets left="101.0" />
+               </GridPane.margin>
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#backButtonAction" text="Povratak" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="189.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#finishVoting" text="Završi glasanje" translateX="90.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Back" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

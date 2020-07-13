@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.stage.StageStyle;
 
 
 import javax.swing.*;
@@ -60,7 +61,7 @@ public class MainPageController {
         //System.out.println(baza.getAdmin().get(0).getE_mail());
         //System.out.println(baza.getAdmin().size());
 
-        if (!adminName.getText().isEmpty() && adminName.getText().equals(baza.getAdmin().get(0).getE_mail())) {
+        if (!adminName.getText().isEmpty() && adminName.getText().equals(baza.getAdmin().get(1).getE_mail())) {
             adminName.getStyleClass().removeAll("poljeNijeIspravno");
             adminName.getStyleClass().add("poljeIspravno");
         } else {
@@ -69,7 +70,7 @@ public class MainPageController {
             daLiTrebaOtvoriti=false;
         }
 
-        if(adminPassword.getText().isEmpty() || !adminPassword.getText().equals(baza.getAdmin().get(0).getPassword())){
+        if(adminPassword.getText().isEmpty() || !adminPassword.getText().equals(baza.getAdmin().get(1).getPassword())){
             adminPassword.getStyleClass().removeAll("poljeIspravno");
             adminPassword.getStyleClass().add("poljeNijeIspravno");
             daLiTrebaOtvoriti=false;
@@ -134,7 +135,7 @@ public class MainPageController {
 
                 baza.addUser(glasac);
 
-                Stage noviProzor = new Stage();
+                Stage noviProzor = new Stage(StageStyle.UNDECORATED);
                 Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/votePage.fxml"));
                 noviProzor.setTitle("Glasački listić");
                 Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);

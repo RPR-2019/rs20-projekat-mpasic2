@@ -9,7 +9,7 @@ public class VotingDAO {
 
    // private static VotingDAO instance;
     private Connection connection;
-    private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions;
+    private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery;
 
 
     public VotingDAO() {
@@ -27,7 +27,8 @@ public class VotingDAO {
             getAllCandidats = connection.prepareStatement("SELECT * FROM candidats");
             getAllPartys = connection.prepareStatement("SELECT * FROM party");
             getAllFunctions = connection.prepareStatement("SELECT * FROM functions");
-
+            QueryAllVotersNumber = connection.prepareStatement("SELECT COUNT(*) FROM voters");
+            newPasswordQuery = connection.prepareStatement("UPDATE admin SET password = ? WHERE e_mail = ?");
 
 
 
@@ -165,6 +166,60 @@ public class VotingDAO {
         }
     }
 
+    public int numberOfVoters(){
+        int brojGlasaca=0;
+        try {
+            ResultSet rs = QueryAllVotersNumber.executeQuery();
+            brojGlasaca = rs.getInt(1);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return brojGlasaca;
+    }
+
+    public ObservableList<Candidats> getPresidents(){
+        ObservableList<Candidats> predsjednici = FXCollections.observableArrayList();
+
+        for(int i=0;i<getCandidats().size();i++){
+            if(getCandidats().get(i).getFunctions().getId() == 1)
+                predsjednici.add(getCandidats().get(i));
+        }
+        return predsjednici;
+    }
+
+    public ObservableList<Candidats> getUnderPresidents(){
+        ObservableList<Candidats> potpredsjednici = FXCollections.observableArrayList();
+
+        for(int i=0;i<getCandidats().size();i++){
+            if(getCandidats().get(i).getFunctions().getId() == 2)
+                potpredsjednici.add(getCandidats().get(i));
+        }
+        return potpredsjednici;
+    }
+
+
+    public ObservableList<Candidats> getDeputy(){
+        ObservableList<Candidats> zamjenici = FXCollections.observableArrayList();
+
+        for(int i=0;i<getCandidats().size();i++){
+            if(getCandidats().get(i).getFunctions().getId() == 3)
+                zamjenici.add(getCandidats().get(i));
+        }
+        return zamjenici;
+    }
+
+    public void setNewPassword(String email, String newPassword){
+        try {
+            newPasswordQuery.setString(1,email);
+            newPasswordQuery.setString(2,newPassword);
+            newPasswordQuery.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

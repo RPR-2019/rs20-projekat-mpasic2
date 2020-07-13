@@ -78,8 +78,17 @@ public class AdministratorController implements Initializable {
         Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
         zatvaranjePoruka.close();
 
-
-
     }
 
+    public void finishVoting(ActionEvent actionEvent) throws IOException {
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/winners.fxml"));
+        noviProzor.setTitle("Izvještaj");
+        Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
+
+        Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
+        zatvaranjePoruka.close();
+    }
 }

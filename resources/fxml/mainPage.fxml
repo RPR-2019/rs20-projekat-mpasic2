@@ -25,7 +25,8 @@
       <GridPane fx:id="mainGridLogin" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -93,7 +94,7 @@
                   <Insets top="45.0" />
                </GridPane.margin>
             </GridPane>
-            <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
+            <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" />
                   <ColumnConstraints hgrow="SOMETIMES" />
@@ -153,6 +154,11 @@
                   <Insets top="45.0" />
                </GridPane.margin>
             </GridPane>
+            <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="15.0" top="60.0" />
+               </GridPane.margin>
+            </Separator>
          </children>
       </GridPane>
    </center>

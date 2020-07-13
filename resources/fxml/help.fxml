@@ -53,7 +53,7 @@
       <Label text="© Mustafa Pašić. All rights reserved." GridPane.rowIndex="14" />
       <Label text="Poštovani korisniče," GridPane.rowIndex="2" />
       <Label prefWidth="194.0" text="svrha ove aplikacije jeste da olakša" GridPane.rowIndex="3" />
-      <Label text="izbor rukovodstva neke firme ili slično. " GridPane.rowIndex="4" />
+      <Label text="izbor rukovodstva neke države ili slično. " GridPane.rowIndex="4" />
       <Label text="Rađena je zbog projekta iz Razvoja " GridPane.rowIndex="5" />
       <Label text="softvera te joj je to glavni i jedini " GridPane.rowIndex="6" />
       <Label text="cilj tačnije namjena. Iznad su navedeni  " GridPane.rowIndex="7" />
