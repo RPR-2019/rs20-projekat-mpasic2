@@ -26,25 +26,25 @@
       <RowConstraints minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TableView GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TableView fx:id="tblPresident" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columns>
-          <TableColumn prefWidth="70.0" text="Redni broj" />
-          <TableColumn prefWidth="102.0" text="Kandidat" />
-            <TableColumn prefWidth="77.0" text="Stranka" />
+          <TableColumn fx:id="colPresidentNumber" prefWidth="70.0" text="Redni broj" />
+          <TableColumn fx:id="colPresidentName" prefWidth="102.0" text="Kandidat" />
+            <TableColumn fx:id="colPresidentParty" prefWidth="78.0" text="Stranka" />
         </columns>
       </TableView>
-      <TableView GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <TableView fx:id="tblUnderPresident" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <columns>
-            <TableColumn prefWidth="70.0" text="Redni broj" />
-            <TableColumn prefWidth="102.0" text="Kandidat" />
-            <TableColumn prefWidth="77.0" text="Stranka" />
+            <TableColumn fx:id="colUnderPresidentNumber" prefWidth="70.0" text="Redni broj" />
+            <TableColumn fx:id="colUnderPresidentName" prefWidth="102.0" text="Kandidat" />
+            <TableColumn fx:id="colUnderPresidentParty" prefWidth="78.0" text="Stranka" />
         </columns>
       </TableView>
-     <TableView GridPane.columnIndex="3" GridPane.rowIndex="1">
+     <TableView fx:id="tblDeputy" GridPane.columnIndex="3" GridPane.rowIndex="1">
        <columns>
-           <TableColumn prefWidth="70.0" text="Redni broj" />
-           <TableColumn prefWidth="102.0" text="Kandidat" />
-           <TableColumn prefWidth="77.0" text="Stranka" />
+           <TableColumn fx:id="colDeputyNumber" prefWidth="70.0" text="Redni broj" />
+           <TableColumn fx:id="colDeputyName" prefWidth="102.0" text="Kandidat" />
+           <TableColumn fx:id="colDeputyParty" prefWidth="78.0" text="Stranka" />
        </columns>
      </TableView>
       <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="PREDSJEDNIK" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
@@ -59,9 +59,9 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <TextField fx:id="txtfldPresident" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="txtfldUnderPresident" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <TextField fx:id="txtfldDeputy" GridPane.columnIndex="3" GridPane.rowIndex="3" />
       <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="UNESITE RB. VAŠEG PREDSJEDNIKA" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />

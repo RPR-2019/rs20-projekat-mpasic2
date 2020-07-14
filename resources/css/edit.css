@@ -30,3 +30,8 @@
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
+#helpBackground{
+    -fx-background-image: url("/img/bluePhoto.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
