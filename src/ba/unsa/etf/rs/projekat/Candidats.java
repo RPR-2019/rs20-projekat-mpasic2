@@ -122,4 +122,6 @@ public class Candidats {
     public void setVote_number(int vote_number) {
         this.vote_number.set(vote_number);
     }
+
+
 }

@@ -59,15 +59,12 @@ public class VotePageController implements Initializable {
 //kad je uredu
             if(!txtfldPresident.getText().isEmpty() ){
                 txtfldPresident.getStyleClass().removeAll("poljeNijeIspravno");
-                txtfldPresident.getStyleClass().add("poljeIspravno");
             }
             if(!txtfldUnderPresident.getText().isEmpty() ){
                 txtfldUnderPresident.getStyleClass().removeAll("poljeNijeIspravno");
-                txtfldUnderPresident.getStyleClass().add("poljeIspravno");
             }
             if(!txtfldDeputy.getText().isEmpty() ){
                 txtfldDeputy.getStyleClass().removeAll("poljeNijeIspravno");
-                txtfldDeputy.getStyleClass().add("poljeIspravno");
             }
 
             alert.showAndWait();

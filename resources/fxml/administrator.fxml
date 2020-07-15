@@ -76,6 +76,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#newPasswordAction" text="Change Password" />
                   <MenuItem mnemonicParsing="false" onAction="#newAdminAction" text="Add Admin" />
+                  <MenuItem onAction="#addCandidatAction" mnemonicParsing="false" text="Add Candidat" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="_Help">

@@ -9,8 +9,8 @@ public class VotingDAO {
 
    // private static VotingDAO instance;
     private Connection connection;
-    private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,
-            addNewAdmin,adminNewQuery;
+    private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,addVote,
+            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats;
 
 
     public VotingDAO() {
@@ -19,8 +19,7 @@ public class VotingDAO {
 
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:baza.db");
-            //findAdminMailQuery = connection.prepareStatement("SELECT * FROM ADMIN WHERE e_mail = ?");
-            //findAdminPasswordQuery = connection.prepareStatement("SELECT * FROM ADMIN WHERE password = ?");
+
             findAdminQuery = connection.prepareStatement("SELECT * FROM admin;");
             addNewUserQuery = connection.prepareStatement("INSERT INTO voters VALUES (?,?,?);");
             findUserQuery = connection.prepareStatement("SELECT * FROM voters");
@@ -32,25 +31,15 @@ public class VotingDAO {
             newPasswordQuery = connection.prepareStatement("UPDATE admin SET password = ? WHERE e_mail = ?");
             addNewAdmin = connection.prepareStatement("INSERT INTO admin VALUES(?,?,?);");
             adminNewQuery = connection.prepareStatement("Select MAX(id)+1 from admin; ");
+            addVote = connection.prepareStatement("UPDATE candidats SET  vote_number = ? WHERE id = ? ");
+            addNewCandidas = connection.prepareStatement("INSERT INTO candidats VALUES(?,?,?,?,?,?,?,?);");
+            newQueryCandidats = connection.prepareStatement("Select MAX(id)+1 from candidats; ");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-       /* public static void removeInstance() {
-            if (instance == null) return;
-            instance.close();
-            instance = null;
-        }*/
 
-
-       /* public void close() {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }*/
     }
 
 
@@ -246,5 +235,31 @@ public class VotingDAO {
         }
     }
 
+
+    public void addCandidate(Candidats cand){
+
+        try {
+            ResultSet rs = newQueryCandidats.executeQuery();
+
+            if (rs.next())
+                cand.setId(rs.getInt(1));
+            else
+                cand.setId(1);
+
+            addNewCandidas.setInt(1,cand.getId());
+            addNewCandidas.setInt(2,cand.getParty_id().getId());
+            addNewCandidas.setString(3,cand.getName());
+            addNewCandidas.setString(4,cand.getLastname());
+            addNewCandidas.setDate(5, Date.valueOf(cand.getBirth_date()));
+            addNewCandidas.setString(6,cand.getLiving_place());
+            addNewCandidas.setInt(7,cand.getFunctions().getId());
+            addNewCandidas.setInt(8,cand.getVote_number());
+
+            addNewCandidas.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
