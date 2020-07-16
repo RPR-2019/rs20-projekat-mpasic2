@@ -7,6 +7,11 @@ public class Party {
     SimpleIntegerProperty id;
     SimpleStringProperty name_party;
 
+    @Override
+    public String toString() {
+        return name_party.getValue();
+    }
+
     public Party(int id, String name_party) {
         this.id = new SimpleIntegerProperty(id);
         this.name_party = new SimpleStringProperty(name_party);

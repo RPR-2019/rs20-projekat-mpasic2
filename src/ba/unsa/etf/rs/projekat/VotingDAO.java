@@ -10,7 +10,7 @@ public class VotingDAO {
    // private static VotingDAO instance;
     private Connection connection;
     private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,addVote,
-            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats;
+            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery;
 
 
     public VotingDAO() {
@@ -23,7 +23,7 @@ public class VotingDAO {
             findAdminQuery = connection.prepareStatement("SELECT * FROM admin;");
             addNewUserQuery = connection.prepareStatement("INSERT INTO voters VALUES (?,?,?);");
             findUserQuery = connection.prepareStatement("SELECT * FROM voters");
-            newQuery = connection.prepareStatement("Select MAX(id)+1 from voters; ");
+            newQuery = connection.prepareStatement("SELECT MAX(id)+1 from voters; ");
             getAllCandidats = connection.prepareStatement("SELECT * FROM candidats");
             getAllPartys = connection.prepareStatement("SELECT * FROM party");
             getAllFunctions = connection.prepareStatement("SELECT * FROM functions");
@@ -33,7 +33,8 @@ public class VotingDAO {
             adminNewQuery = connection.prepareStatement("Select MAX(id)+1 from admin; ");
             addVote = connection.prepareStatement("UPDATE candidats SET  vote_number = ? WHERE id = ? ");
             addNewCandidas = connection.prepareStatement("INSERT INTO candidats VALUES(?,?,?,?,?,?,?,?);");
-            newQueryCandidats = connection.prepareStatement("Select MAX(id)+1 from candidats; ");
+            newQueryCandidats = connection.prepareStatement("SELECT MAX(id)+1 from candidats; ");
+            howMuchVotesQuery = connection.prepareStatement("SELECT vote_number FROM candidats WHERE id = ?");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -260,6 +261,21 @@ public class VotingDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addVotes(int numberVote, int id){
+        try {
+            addVote.setInt(1, numberVote);
+            addVote.setInt(2,id);
+            addVote.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeBase() throws SQLException {
+        connection.close();
     }
 
 }

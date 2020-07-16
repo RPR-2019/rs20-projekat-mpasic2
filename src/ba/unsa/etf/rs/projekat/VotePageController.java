@@ -13,8 +13,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import static java.lang.Integer.valueOf;
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class VotePageController implements Initializable {
@@ -36,52 +39,12 @@ public class VotePageController implements Initializable {
     public TextField txtfldPresident;
     public TextField txtfldUnderPresident;
     public TextField txtfldDeputy;
+    public Party part = new Party(5,"aaa");
+    public Functions fun = new Functions(4,"kralj");
+    public Candidats predsjednik = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
+    public Candidats potpredsjednik = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
+    public Candidats zamjenik = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
 
-    public void votePageBackAction(ActionEvent actionEvent) throws IOException {
-        if(txtfldPresident.getText().isEmpty() || txtfldUnderPresident.getText().isEmpty() || txtfldDeputy.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Greška prilikom glasanja");
-            alert.setContentText("Niste popunili sva polja!");
-
-            if(txtfldPresident.getText().isEmpty() ){
-                txtfldPresident.getStyleClass().removeAll("poljeIspravno");
-                txtfldPresident.getStyleClass().add("poljeNijeIspravno");
-            }
-            if(txtfldUnderPresident.getText().isEmpty() ){
-                txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
-                txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
-            }
-            if(txtfldDeputy.getText().isEmpty() ){
-                txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
-                txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
-            }
-//kad je uredu
-            if(!txtfldPresident.getText().isEmpty() ){
-                txtfldPresident.getStyleClass().removeAll("poljeNijeIspravno");
-            }
-            if(!txtfldUnderPresident.getText().isEmpty() ){
-                txtfldUnderPresident.getStyleClass().removeAll("poljeNijeIspravno");
-            }
-            if(!txtfldDeputy.getText().isEmpty() ){
-                txtfldDeputy.getStyleClass().removeAll("poljeNijeIspravno");
-            }
-
-            alert.showAndWait();
-        }
-        else {
-
-            Stage noviProzor = new Stage();
-            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
-            noviProzor.setTitle("E-glasanje");
-            Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            noviProzor.setScene(scene);
-            noviProzor.show();
-
-            Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
-            zatvaranjePoruka.close();
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -102,5 +65,215 @@ public class VotePageController implements Initializable {
     }
 
 
+    public void votePageBackAction(ActionEvent actionEvent) throws IOException {
+        boolean presidentOK = false;
+        boolean underPresidentOK = false;
+        boolean deputyOK = false;
+        for (int i=0;i<baza.getPresidents().size();i++){
+            //System.out.printf("Ovo je u bazi: " + baza.getPresidents().get(i).getId() + "\n");
+            //System.out.printf("Ovo je u txt-u: " + txtfldPresident.getText() + "\n");
+            if(valueOf(txtfldPresident.getText())==baza.getPresidents().get(i).getId()){
+                presidentOK=true;}
 
+        }
+        for (int i=0;i<baza.getUnderPresidents().size();i++){
+            //System.out.printf("Ovo je u bazi: " + baza.getUnderPresidents().get(i).getId() + "\n");
+            if(valueOf(txtfldUnderPresident.getText())==baza.getUnderPresidents().get(i).getId()){
+                underPresidentOK=true;}
+
+        }
+        for (int i=0;i<baza.getDeputy().size();i++){
+            if(valueOf(txtfldDeputy.getText())==baza.getDeputy().get(i).getId()){
+                deputyOK=true;}
+
+        }
+
+        if(txtfldPresident.getText().isEmpty() || txtfldUnderPresident.getText().isEmpty() || txtfldDeputy.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom glasanja");
+            alert.setContentText("Niste popunili sva polja!");
+
+            if(txtfldPresident.getText().isEmpty() ){
+                txtfldPresident.getStyleClass().removeAll("poljeIspravno");
+                txtfldPresident.getStyleClass().add("poljeNijeIspravno");
+            }
+            if(txtfldUnderPresident.getText().isEmpty() ){
+                txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
+                txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
+            }
+            if(txtfldDeputy.getText().isEmpty() ){
+                txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
+                txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
+            }
+    //kad je uredu
+            if(!txtfldPresident.getText().isEmpty() ){
+                txtfldPresident.getStyleClass().removeAll("poljeNijeIspravno");
+            }
+            if(!txtfldUnderPresident.getText().isEmpty() ){
+                txtfldUnderPresident.getStyleClass().removeAll("poljeNijeIspravno");
+            }
+            if(!txtfldDeputy.getText().isEmpty() ){
+                txtfldDeputy.getStyleClass().removeAll("poljeNijeIspravno");
+            }
+
+            alert.showAndWait();
+        }
+        //kad nije prazno ali uneseni podaci nisu validni
+
+        if(!presidentOK){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom glasanja");
+            alert.setContentText("Neispravno glasanje!");
+            alert.showAndWait();
+
+            txtfldPresident.getStyleClass().removeAll("poljeIspravno");
+            txtfldPresident.getStyleClass().add("poljeNijeIspravno");
+        }
+        if(!underPresidentOK){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom glasanja");
+            alert.setContentText("Neispravno glasanje!");
+            alert.showAndWait();
+
+            txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
+            txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
+        }
+        if(!deputyOK){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom glasanja");
+            alert.setContentText("Neispravno glasanje!");
+            alert.showAndWait();
+
+            txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
+            txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
+        }
+        if(presidentOK && underPresidentOK && deputyOK) {
+
+            Stage noviProzor = new Stage();
+            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
+            noviProzor.setTitle("E-glasanje");
+            Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            noviProzor.setScene(scene);
+            noviProzor.show();
+
+            Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
+            zatvaranjePoruka.close();
+        }
+    }
+
+
+    public void onActionSacuvaj(ActionEvent actionEvent) throws IOException, SQLException {
+        boolean presidentOK = false;
+        boolean underPresidentOK = false;
+        boolean deputyOK = false;
+        for (int i=0;i<baza.getPresidents().size();i++){
+            //System.out.printf("Ovo je u bazi: " + baza.getPresidents().get(i).getId() + "\n");
+            //System.out.printf("Ovo je u txt-u: " + txtfldPresident.getText() + "\n");
+            if(valueOf(txtfldPresident.getText())==baza.getPresidents().get(i).getId()){
+                predsjednik=baza.getPresidents().get(i);
+                presidentOK=true;}
+
+        }
+        for (int i=0;i<baza.getUnderPresidents().size();i++){
+            //System.out.printf("Ovo je u bazi: " + baza.getUnderPresidents().get(i).getId() + "\n");
+            if(valueOf(txtfldUnderPresident.getText())==baza.getUnderPresidents().get(i).getId()){
+                potpredsjednik=baza.getUnderPresidents().get(i);
+                underPresidentOK=true;}
+
+        }
+        for (int i=0;i<baza.getDeputy().size();i++){
+            if(valueOf(txtfldDeputy.getText())==baza.getDeputy().get(i).getId()){
+                zamjenik=baza.getDeputy().get(i);
+                deputyOK=true;}
+
+        }
+
+        if(txtfldPresident.getText().isEmpty() || txtfldUnderPresident.getText().isEmpty() || txtfldDeputy.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom glasanja");
+            alert.setContentText("Niste popunili sva polja!");
+
+            if(txtfldPresident.getText().isEmpty() ){
+                txtfldPresident.getStyleClass().removeAll("poljeIspravno");
+                txtfldPresident.getStyleClass().add("poljeNijeIspravno");
+            }
+            if(txtfldUnderPresident.getText().isEmpty() ){
+                txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
+                txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
+            }
+            if(txtfldDeputy.getText().isEmpty() ){
+                txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
+                txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
+            }
+            //kad je uredu
+            if(!txtfldPresident.getText().isEmpty() ){
+                txtfldPresident.getStyleClass().removeAll("poljeNijeIspravno");
+            }
+            if(!txtfldUnderPresident.getText().isEmpty() ){
+                txtfldUnderPresident.getStyleClass().removeAll("poljeNijeIspravno");
+            }
+            if(!txtfldDeputy.getText().isEmpty() ){
+                txtfldDeputy.getStyleClass().removeAll("poljeNijeIspravno");
+            }
+
+            alert.showAndWait();
+        }
+        //kad nije prazno ali uneseni podaci nisu validni
+
+        if(!presidentOK){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom glasanja");
+            alert.setContentText("Neispravno glasanje!");
+            alert.showAndWait();
+
+            txtfldPresident.getStyleClass().removeAll("poljeIspravno");
+            txtfldPresident.getStyleClass().add("poljeNijeIspravno");
+        }
+        if(!underPresidentOK){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom glasanja");
+            alert.setContentText("Neispravno glasanje!");
+            alert.showAndWait();
+
+            txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
+            txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
+        }
+        if(!deputyOK){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom glasanja");
+            alert.setContentText("Neispravno glasanje!");
+            alert.showAndWait();
+
+            txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
+            txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
+        }
+        if(presidentOK && underPresidentOK && deputyOK) {
+
+            baza.addVotes(predsjednik.getVote_number()+1,predsjednik.getId());
+            baza.addVotes(potpredsjednik.getVote_number()+1,potpredsjednik.getId());
+            baza.addVotes(zamjenik.getVote_number()+1,zamjenik.getId());
+
+
+
+            Stage noviProzor = new Stage();
+            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
+            noviProzor.setTitle("E-glasanje");
+            Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            noviProzor.setScene(scene);
+            noviProzor.show();
+
+            Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
+            zatvaranjePoruka.close();
+
+            baza.closeBase();
+        }
+    }
 }

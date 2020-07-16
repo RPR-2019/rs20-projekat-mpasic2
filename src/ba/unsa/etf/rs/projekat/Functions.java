@@ -12,6 +12,11 @@ public class Functions {
         this.function_name = new SimpleStringProperty(function_name);
     }
 
+    @Override
+    public String toString() {
+        return function_name.getValue();
+    }
+
     public int getId() {
         return id.get();
     }
