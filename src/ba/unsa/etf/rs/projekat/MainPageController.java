@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
@@ -60,12 +61,14 @@ public class MainPageController {
 
         for(int i=0;i<baza.getAdmin().size();i++){
             if(adminName.getText().equals(baza.getAdmin().get(i).getE_mail()) && adminPassword.getText().equals(baza.getAdmin().get(i).getPassword())) {
+
                 Stage noviProzor = new Stage();
                 Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
                 noviProzor.setTitle("Dobrodosao " + adminName.getText());
                 Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
                 noviProzor.setScene(scene);
                 noviProzor.show();
+
 
                 Stage zatvaranjePoruka = (Stage) adminName.getScene().getWindow();
                 zatvaranjePoruka.close();
@@ -87,7 +90,7 @@ public class MainPageController {
 
     }
 
-    public void loginUserButton(ActionEvent actionEvent) throws IOException {
+    public void loginUserButton(ActionEvent actionEvent) throws IOException, SQLException {
         boolean daLiJeOK = true;
 
 
@@ -118,6 +121,7 @@ public class MainPageController {
             if(sveUredu) {
 
                 baza.addUser(glasac);
+                baza.closeBase();
 
                 Stage noviProzor = new Stage(StageStyle.UNDECORATED);
                 Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/votePage.fxml"));
@@ -141,6 +145,8 @@ public class MainPageController {
         }
 
         else{
+
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Greska prilikom registracije");

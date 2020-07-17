@@ -9,6 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Observable;
 
@@ -35,7 +36,7 @@ public class NewCandidatController {
         candidateFunction.setItems(funkcije);
     }
 
-    public void sacuvajAction(ActionEvent actionEvent) {
+    public void sacuvajAction(ActionEvent actionEvent) throws SQLException {
         int numbefOfCandidats = baza.getCandidats().size();
 
         cand.setId(numbefOfCandidats+1);
@@ -60,5 +61,6 @@ public class NewCandidatController {
 
         Stage zatvaranjePoruka = (Stage) candidateFunction.getScene().getWindow();
         zatvaranjePoruka.close();
+        baza.closeBase();
     }
 }

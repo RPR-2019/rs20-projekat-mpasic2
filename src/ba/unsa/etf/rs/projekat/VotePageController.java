@@ -65,7 +65,7 @@ public class VotePageController implements Initializable {
     }
 
 
-    public void votePageBackAction(ActionEvent actionEvent) throws IOException {
+    public void votePageBackAction(ActionEvent actionEvent) throws IOException, SQLException {
         boolean presidentOK = false;
         boolean underPresidentOK = false;
         boolean deputyOK = false;
@@ -152,7 +152,7 @@ public class VotePageController implements Initializable {
             txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
         }
         if(presidentOK && underPresidentOK && deputyOK) {
-
+            baza.closeBase();
             Stage noviProzor = new Stage();
             Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
             noviProzor.setTitle("E-glasanje");
@@ -163,6 +163,7 @@ public class VotePageController implements Initializable {
             Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
             zatvaranjePoruka.close();
         }
+
     }
 
 
@@ -257,11 +258,12 @@ public class VotePageController implements Initializable {
         }
         if(presidentOK && underPresidentOK && deputyOK) {
 
-            baza.addVotes(predsjednik.getVote_number()+1,predsjednik.getId());
-            baza.addVotes(potpredsjednik.getVote_number()+1,potpredsjednik.getId());
-            baza.addVotes(zamjenik.getVote_number()+1,zamjenik.getId());
 
+            baza.addVotes(predsjednik);
+            baza.addVotes(potpredsjednik);
+            baza.addVotes(zamjenik);
 
+            baza.closeBase();
 
             Stage noviProzor = new Stage();
             Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
@@ -273,7 +275,7 @@ public class VotePageController implements Initializable {
             Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
             zatvaranjePoruka.close();
 
-            baza.closeBase();
+
         }
     }
 }

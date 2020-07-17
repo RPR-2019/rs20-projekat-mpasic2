@@ -31,7 +31,7 @@ public class VotingDAO {
             newPasswordQuery = connection.prepareStatement("UPDATE admin SET password = ? WHERE e_mail = ?");
             addNewAdmin = connection.prepareStatement("INSERT INTO admin VALUES(?,?,?);");
             adminNewQuery = connection.prepareStatement("Select MAX(id)+1 from admin; ");
-            addVote = connection.prepareStatement("UPDATE candidats SET  vote_number = ? WHERE id = ? ");
+            addVote = connection.prepareStatement("UPDATE candidats SET vote_number = ? WHERE id = ?;");
             addNewCandidas = connection.prepareStatement("INSERT INTO candidats VALUES(?,?,?,?,?,?,?,?);");
             newQueryCandidats = connection.prepareStatement("SELECT MAX(id)+1 from candidats; ");
             howMuchVotesQuery = connection.prepareStatement("SELECT vote_number FROM candidats WHERE id = ?");
@@ -263,15 +263,17 @@ public class VotingDAO {
         }
     }
 
-    public void addVotes(int numberVote, int id){
+    public void addVotes(Candidats cand){
         try {
-            addVote.setInt(1, numberVote);
-            addVote.setInt(2,id);
+            addVote.setInt(1,cand.getVote_number()+1);
+            addVote.setInt(2,cand.getId());
+
             addVote.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public void closeBase() throws SQLException {

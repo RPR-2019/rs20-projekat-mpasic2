@@ -107,7 +107,8 @@ public class AdministratorController implements Initializable {
         noviProzor.setTitle("Dodavanje administratora");
         Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         noviProzor.setScene(scene);
-        noviProzor.show();
+        noviProzor.showAndWait();
+        //tblCandidats.setItems(baza.getCandidats());
     }
 
     public void addCandidatAction(ActionEvent actionEvent) throws IOException {
