@@ -45,56 +45,70 @@ public class MainPageController {
         noviProzor.show();
     }
 
-    /*adminName.textProperty().addListener((obs, oldIme, newIme) -> { });
-    public boolean valjalMail(String email) {
-        Character ludoA = '@';
-        for(int i=0;i<adminName.getLength();i++){
-            if(email.charAt(i) == ludoA)
-                return true;
-        }
-        return false;
-    }*/
+    public void loginAdminButton(ActionEvent actionEvent) throws IOException, SQLException {
 
-
-    public void loginAdminButton(ActionEvent actionEvent) throws IOException {
-        boolean alertProzor=false;
-
-        for(int i=0;i<baza.getAdmin().size();i++){
-            if(adminName.getText().equals(baza.getAdmin().get(i).getE_mail()) && adminPassword.getText().equals(baza.getAdmin().get(i).getPassword())) {
-
-                Stage noviProzor = new Stage();
-                Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
-                noviProzor.setTitle("Dobrodosao " + adminName.getText());
-                Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-                noviProzor.setScene(scene);
-                noviProzor.show();
-
-
-                Stage zatvaranjePoruka = (Stage) adminName.getScene().getWindow();
-                zatvaranjePoruka.close();
-                alertProzor=true;
+        boolean isThereAdmin=false;
+        for(int i=0;i<baza.getAdmin().size();i++) {
+            if (adminName.getText().equals(baza.getAdmin().get(i).getE_mail()) && adminPassword.getText().equals(baza.getAdmin().get(i).getPassword())) {
+                isThereAdmin=true;
             }
+        }
+        if(isThereAdmin) {
 
+            Stage noviProzor = new Stage();
+            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
+            noviProzor.setTitle("Dobrodosao " + adminName.getText());
+            Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            noviProzor.setScene(scene);
+            noviProzor.show();
 
+            Stage zatvaranjePoruka = (Stage) adminName.getScene().getWindow();
+            zatvaranjePoruka.close();
+            baza.closeBase();
         }
 
-        if(!alertProzor){
+        else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Greška prilikom registracije");
             alert.setContentText("Neispravni podaci!");
-
             alert.showAndWait();
         }
+    }
 
 
+    public static boolean isJMBGOk(String jmbg) {
+        String s = "";
+        String input = jmbg.substring(0, jmbg.length() - 1);
+        int i = 0, i1 = 0, diff = 0;
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(0))).intValue() * 7);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(1))).intValue() * 6);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(2))).intValue() * 5);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(3))).intValue() * 4);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(4))).intValue() * 3);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(5))).intValue() * 2);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(6))).intValue() * 7);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(7))).intValue() * 6);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(8))).intValue() * 5);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(9))).intValue() * 4);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(10))).intValue() * 3);
+        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(11))).intValue() * 2);
+        i1 = i;
+        i = i / 11;
+        diff = i1 - (i * 11);
+        if ((diff == 0) || (diff == 1)) {
+            s = input + 0;
+        } else {
+            s = input + (11 - diff);
+        }
+        return s.equals(jmbg);
     }
 
     public void loginUserButton(ActionEvent actionEvent) throws IOException, SQLException {
         boolean daLiJeOK = true;
 
 
-        if(userJMBG.getText().isEmpty() || userJMBG.getLength()!=13){
+        if(userJMBG.getText().isEmpty() || !isJMBGOk(userJMBG.getText())){
             userJMBG.getStyleClass().removeAll("poljeIspravno");
             userJMBG.getStyleClass().add("poljeNijeIspravno");
             daLiJeOK=false;

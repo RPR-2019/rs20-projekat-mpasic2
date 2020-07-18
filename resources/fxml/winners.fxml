@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.WinnersController">
+<GridPane fx:id="winnersPane" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.WinnersController">
+    <stylesheets>
+        <URL value="@/css/edit.css" />
+    </stylesheets>
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="5.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -22,21 +27,39 @@
       <RowConstraints minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Novoizabrani predsjednik:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label text="Novoizabrani potpredsjednik:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Novoizabrani zamjenik:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label text="Novoizabrani predsjednik:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <font>
+              <Font name="System Bold" size="12.0" />
+          </font>
+      </Label>
+      <Label text="Novoizabrani potpredsjednik:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <font>
+              <Font name="System Bold" size="12.0" />
+          </font>
+      </Label>
+      <Label text="Novoizabrani zamjenik:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+          <font>
+              <Font name="System Bold" size="12.0" />
+          </font>
+      </Label>
       <TextField fx:id="winnerPresident" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <TextField fx:id="winnerUnderPresident" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <TextField fx:id="winnerDeputy" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <Label text="Br. glasova" GridPane.columnIndex="3">
+      <Label text="Br. glasova" textFill="WHITE" GridPane.columnIndex="3">
          <GridPane.margin>
             <Insets left="5.0" />
-         </GridPane.margin></Label>
+         </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <TextField fx:id="winnerPresidentVotes" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <TextField fx:id="winnerUnderPresidentVotes" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       <TextField fx:id="winnerDeputyVotes" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
       <TextField fx:id="allVotes" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-      <Label text="Ukupan broj glasača:" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label text="Ukupan broj glasača:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+       <font>
+           <Font name="System Bold" size="12.0" />
+       </font></Label>
       <Separator prefWidth="235.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
    </children>
 </GridPane>

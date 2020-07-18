@@ -30,7 +30,22 @@
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
-#helpBackground{
+#winnersPane{
+    -fx-background-image: url("/img/bluePhoto.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+#newPartyGrid{
+    -fx-background-image: url("/img/bluePhoto.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+#newCnadidatGrid{
+    -fx-background-image: url("/img/bluePhoto.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+#newAdminGrid{
     -fx-background-image: url("/img/bluePhoto.png");
     -fx-background-size: cover;
     -fx-background-position: center center;

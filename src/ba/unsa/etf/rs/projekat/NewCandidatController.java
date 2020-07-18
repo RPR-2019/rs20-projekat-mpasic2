@@ -52,7 +52,7 @@ public class NewCandidatController {
 
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Succesufon");
+        alert.setTitle("Successful");
         alert.setHeaderText("Dodavanje kandidata");
         alert.setContentText("Uspjesno ste dodali kandidata!");
 

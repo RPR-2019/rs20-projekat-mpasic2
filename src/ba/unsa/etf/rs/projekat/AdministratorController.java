@@ -20,6 +20,7 @@ import javax.naming.Binding;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
@@ -72,6 +73,7 @@ public class AdministratorController implements Initializable {
     }
 
     public void finishVoting(ActionEvent actionEvent) throws IOException {
+
         Stage noviProzor = new Stage();
         Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/winners.fxml"));
         noviProzor.setTitle("Izvještaj");
@@ -118,5 +120,16 @@ public class AdministratorController implements Initializable {
         Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         noviProzor.setScene(scene);
         noviProzor.show();
+    }
+
+    public void addPartyAction(ActionEvent actionEvent) throws IOException, SQLException {
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/newParty.fxml"));
+        noviProzor.setTitle("Dodavanje stranke");
+        Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
+
+        //baza.closeBase();
     }
 }

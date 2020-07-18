@@ -26,7 +26,7 @@ public class HelpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Image image = new Image("/img/icon.png");
+        Image image = new Image("/img/admin.png");
         imgAbout.setImage(image);
 
     }

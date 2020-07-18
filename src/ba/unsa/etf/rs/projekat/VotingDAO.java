@@ -10,7 +10,7 @@ public class VotingDAO {
    // private static VotingDAO instance;
     private Connection connection;
     private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,addVote,
-            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery;
+            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery,deleteVoterQuery,addNewPartyQuery,newPartyQuery;
 
 
     public VotingDAO() {
@@ -35,6 +35,9 @@ public class VotingDAO {
             addNewCandidas = connection.prepareStatement("INSERT INTO candidats VALUES(?,?,?,?,?,?,?,?);");
             newQueryCandidats = connection.prepareStatement("SELECT MAX(id)+1 from candidats; ");
             howMuchVotesQuery = connection.prepareStatement("SELECT vote_number FROM candidats WHERE id = ?");
+            deleteVoterQuery = connection.prepareStatement("DELETE FROM voters WHERE id = ?");
+            addNewPartyQuery = connection.prepareStatement("INSERT INTO party VALUES(?,?);");
+            newPartyQuery = connection.prepareStatement("Select MAX(id)+1 from party; ");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -278,6 +281,40 @@ public class VotingDAO {
 
     public void closeBase() throws SQLException {
         connection.close();
+    }
+
+    public void deleteVoters(int id){
+        try {
+            deleteVoterQuery.setInt(1,id);
+
+
+            deleteVoterQuery.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addParty(Party part){
+
+        try {
+            ResultSet rs = newPartyQuery.executeQuery();
+
+            if (rs.next())
+                part.setId(rs.getInt(1));
+            else
+                part.setId(1);
+
+            addNewPartyQuery.setInt(1,part.getId());
+            addNewPartyQuery.setString(2,part.getName_party());
+
+
+            addNewPartyQuery.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

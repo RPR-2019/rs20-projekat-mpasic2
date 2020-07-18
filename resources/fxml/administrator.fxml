@@ -74,9 +74,10 @@
           </Menu>
           <Menu mnemonicParsing="false" text="_Edit">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#newPasswordAction" text="Change Password" />
-                  <MenuItem mnemonicParsing="false" onAction="#newAdminAction" text="Add Admin" />
-                  <MenuItem onAction="#addCandidatAction" mnemonicParsing="false" text="Add Candidat" />
+              <MenuItem mnemonicParsing="false" onAction="#newPasswordAction" text="_Change Password" />
+                  <MenuItem mnemonicParsing="false" onAction="#newAdminAction" text="_Add Admin" />
+                  <MenuItem mnemonicParsing="false" onAction="#addCandidatAction" text="_Add Candidat" />
+                  <MenuItem mnemonicParsing="false" onAction="#addPartyAction" text="_Add party" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="_Help">
