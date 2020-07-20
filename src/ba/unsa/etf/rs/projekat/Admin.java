@@ -14,8 +14,7 @@ public class Admin {
         this.password = new SimpleStringProperty(password);
     }
 
-    /*public Admin(int anInt, String string, String string1) {
-    }*/
+    //all setters and getters
 
     public int getId() {
         return id.get();

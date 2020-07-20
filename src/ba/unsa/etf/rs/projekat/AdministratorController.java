@@ -1,23 +1,19 @@
 package ba.unsa.etf.rs.projekat;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import javax.naming.Binding;
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -57,7 +53,6 @@ public class AdministratorController implements Initializable {
         colJMBG.setCellValueFactory(new PropertyValueFactory<>("jmbg"));
     }
 
-
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
 
         Stage noviProzor = new Stage();
@@ -73,16 +68,59 @@ public class AdministratorController implements Initializable {
     }
 
     public void finishVoting(ActionEvent actionEvent) throws IOException {
+        int counderPresident = 0;
+        int counterUnderPresident = 0;
+        int conterDeputy = 0;
+        int maxPred=0;
+        for(int i=0;i<baza.getPresidents().size();i++){
+            if(baza.getPresidents().get(i).getVote_number() > baza.getPresidents().get(maxPred).getVote_number())
+                maxPred=i;
+        }
+        int maxPotpred=0;
+        for(int i=0;i<baza.getUnderPresidents().size();i++){
+            if(baza.getUnderPresidents().get(i).getVote_number() > baza.getUnderPresidents().get(maxPotpred).getVote_number())
+                maxPotpred=i;
+        }
+        int maxDeputy=0;
+        for(int i=0;i<baza.getDeputy().size();i++){
+            if(baza.getDeputy().get(i).getVote_number() > baza.getDeputy().get(maxDeputy).getVote_number())
+                maxDeputy=i;
+        }
+        for(int i=0;i<baza.getPresidents().size();i++){
+            if(baza.getPresidents().get(i).getVote_number() == baza.getPresidents().get(maxPred).getVote_number())
+                counderPresident=counderPresident+1;
+        }
+        for(int i=0;i<baza.getUnderPresidents().size();i++){
+            if(baza.getUnderPresidents().get(i).getVote_number() == baza.getUnderPresidents().get(maxPotpred).getVote_number())
+                counterUnderPresident=counterUnderPresident+1;
+        }
+        for(int i=0;i<baza.getDeputy().size();i++){
+            if(baza.getDeputy().get(i).getVote_number() == baza.getDeputy().get(maxDeputy).getVote_number())
+                conterDeputy=conterDeputy+1;
+        }
 
-        Stage noviProzor = new Stage();
-        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/winners.fxml"));
-        noviProzor.setTitle("Izvještaj");
-        Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-        noviProzor.setScene(scene);
-        noviProzor.show();
+        if(counderPresident>1 || counterUnderPresident>1 || conterDeputy>1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Info");
+            alert.setHeaderText("Postoje kandidati koji imaju jednak broj glasova!");
+            alert.setContentText("Molimo kontaktirajte administraotora");
 
-        Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
-        zatvaranjePoruka.close();
+            alert.showAndWait();
+
+        }
+        else{
+            Stage noviProzor = new Stage();
+            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/winners.fxml"));
+            noviProzor.setTitle("Izvještaj");
+            Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            noviProzor.setScene(scene);
+            noviProzor.show();
+
+            Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
+            zatvaranjePoruka.close();
+        }
+
+
     }
 
     public void helpOnAction(ActionEvent actionEvent) throws IOException {
@@ -120,6 +158,9 @@ public class AdministratorController implements Initializable {
         Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         noviProzor.setScene(scene);
         noviProzor.show();
+
+        Stage zatvaranjePoruka = (Stage) mainGridAdmin.getScene().getWindow();
+        zatvaranjePoruka.close();
     }
 
     public void addPartyAction(ActionEvent actionEvent) throws IOException, SQLException {
@@ -130,6 +171,5 @@ public class AdministratorController implements Initializable {
         noviProzor.setScene(scene);
         noviProzor.show();
 
-        //baza.closeBase();
     }
 }

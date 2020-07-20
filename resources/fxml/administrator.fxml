@@ -67,22 +67,22 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="_File">
+          <Menu mnemonicParsing="true" text="_File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#backButtonAction" text="_Back" />
+              <MenuItem mnemonicParsing="true" onAction="#backButtonAction" text="_Back" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="_Edit">
+          <Menu mnemonicParsing="true" text="_Edit">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#newPasswordAction" text="_Change Password" />
-                  <MenuItem mnemonicParsing="false" onAction="#newAdminAction" text="_Add Admin" />
-                  <MenuItem mnemonicParsing="false" onAction="#addCandidatAction" text="_Add Candidat" />
-                  <MenuItem mnemonicParsing="false" onAction="#addPartyAction" text="_Add party" />
+              <MenuItem mnemonicParsing="true" onAction="#newPasswordAction" text="_Change Password" />
+                  <MenuItem mnemonicParsing="true" onAction="#newAdminAction" text="_Add Admin" />
+                  <MenuItem mnemonicParsing="true" onAction="#addCandidatAction" text="_Add Candidat" />
+                  <MenuItem mnemonicParsing="true" onAction="#addPartyAction" text="_Add party" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="_Help">
+          <Menu mnemonicParsing="true" text="_Help">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#helpOnAction" text="_Kontakt" />
+              <MenuItem mnemonicParsing="true" onAction="#helpOnAction" text="_Kontakt" />
             </items>
           </Menu>
         </menus>

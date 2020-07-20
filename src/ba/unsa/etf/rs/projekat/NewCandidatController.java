@@ -3,15 +3,21 @@ package ba.unsa.etf.rs.projekat;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Observable;
+
+import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class NewCandidatController {
 
@@ -36,7 +42,7 @@ public class NewCandidatController {
         candidateFunction.setItems(funkcije);
     }
 
-    public void sacuvajAction(ActionEvent actionEvent) throws SQLException {
+    public void sacuvajAction(ActionEvent actionEvent) throws SQLException, IOException {
         int numbefOfCandidats = baza.getCandidats().size();
 
         cand.setId(numbefOfCandidats+1);
@@ -62,5 +68,13 @@ public class NewCandidatController {
         Stage zatvaranjePoruka = (Stage) candidateFunction.getScene().getWindow();
         zatvaranjePoruka.close();
         baza.closeBase();
+
+
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
+        noviProzor.setTitle("Dobrodosli");
+        Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
     }
 }

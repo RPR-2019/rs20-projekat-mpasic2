@@ -24,7 +24,7 @@ public class VotingDAO {
             addNewUserQuery = connection.prepareStatement("INSERT INTO voters VALUES (?,?,?);");
             findUserQuery = connection.prepareStatement("SELECT * FROM voters");
             newQuery = connection.prepareStatement("SELECT MAX(id)+1 from voters; ");
-            getAllCandidats = connection.prepareStatement("SELECT * FROM candidats");
+            getAllCandidats = connection.prepareStatement("SELECT * FROM candidats ORDER BY function, vote_number DESC, name");
             getAllPartys = connection.prepareStatement("SELECT * FROM party");
             getAllFunctions = connection.prepareStatement("SELECT * FROM functions");
             QueryAllVotersNumber = connection.prepareStatement("SELECT COUNT(*) FROM voters");

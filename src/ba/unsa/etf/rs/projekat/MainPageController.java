@@ -6,8 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -15,8 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
+
 import javafx.stage.StageStyle;
 
 
@@ -33,10 +34,16 @@ public class MainPageController {
     public TextField userNumber;
     public TextField userJMBG;
     public Button closeMainPage;
+    public GridPane mainGridLogin;
+    public ButtonBar buttonBarPhoto;
     VotingDAO baza = new VotingDAO();
     private Voters glasac = new Voters(1,"","");
 
-    public void helpProzor(ActionEvent actionEvent) throws IOException {
+    /*public MainPageController(VotingDAO baza) {
+        this.baza=baza;
+    }*/
+
+    public void helpAction(ActionEvent actionEvent) throws IOException {
         Stage noviProzor = new Stage();
         Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/help.fxml"));
         noviProzor.setTitle("Kontakt centar");
