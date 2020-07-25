@@ -10,7 +10,8 @@ public class VotingDAO {
    // private static VotingDAO instance;
     private Connection connection;
     private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,addVote,
-            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery,deleteVoterQuery,addNewPartyQuery,newPartyQuery;
+            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery,deleteVoterQuery,addNewPartyQuery,newPartyQuery,
+            newQueryVotersDelete;
 
 
     public VotingDAO() {
@@ -38,6 +39,7 @@ public class VotingDAO {
             deleteVoterQuery = connection.prepareStatement("DELETE FROM voters WHERE id = ?");
             addNewPartyQuery = connection.prepareStatement("INSERT INTO party VALUES(?,?);");
             newPartyQuery = connection.prepareStatement("Select MAX(id)+1 from party; ");
+            newQueryVotersDelete = connection.prepareStatement("SELECT MAX(id) from voters; ");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -316,5 +318,6 @@ public class VotingDAO {
             e.printStackTrace();
         }
     }
+
 
 }

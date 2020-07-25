@@ -63,11 +63,11 @@ public class NewCandidatController {
         alert.setContentText("Uspjesno ste dodali kandidata!");
 
         alert.showAndWait();
-
+        baza.closeBase();
 
         Stage zatvaranjePoruka = (Stage) candidateFunction.getScene().getWindow();
         zatvaranjePoruka.close();
-        baza.closeBase();
+
 
 
         Stage noviProzor = new Stage();

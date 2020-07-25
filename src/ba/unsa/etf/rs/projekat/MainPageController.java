@@ -61,10 +61,15 @@ public class MainPageController {
             }
         }
         if(isThereAdmin) {
+            String pom ="";
+            for(int i = 0; i <adminName.getText().length();i++){
+                if(adminName.getText().charAt(i)== '@') break;
+                pom+=adminName.getText().charAt(i);
+            }
 
             Stage noviProzor = new Stage();
             Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
-            noviProzor.setTitle("Dobrodosao " + adminName.getText());
+            noviProzor.setTitle("Dobrodosao " + pom);
             Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             noviProzor.setScene(scene);
             noviProzor.show();

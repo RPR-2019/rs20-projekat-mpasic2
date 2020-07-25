@@ -66,8 +66,8 @@ public class VotePageController implements Initializable {
 
 
     public void votePageBackAction(ActionEvent actionEvent) throws IOException, SQLException {
-        int numbefOfVoters = baza.getUsers().size();
-        baza.deleteVoters(numbefOfVoters);
+
+        baza.deleteVoters(baza.numberOfVoters());
 
             baza.closeBase();
             Stage noviProzor = new Stage();
@@ -79,7 +79,6 @@ public class VotePageController implements Initializable {
 
             Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
             zatvaranjePoruka.close();
-
 
     }
 
@@ -181,6 +180,13 @@ public class VotePageController implements Initializable {
             baza.addVotes(zamjenik);
 
             baza.closeBase();
+
+            //alert for succes
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Successful voting");
+            alert.setHeaderText("Uspješno ste glasali");
+            alert.setContentText("Hvala Vam!");
+            alert.showAndWait();
 
             Stage noviProzor = new Stage();
             Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
