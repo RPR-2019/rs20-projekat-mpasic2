@@ -13,17 +13,41 @@ public class NewPartyController {
     private Party part = new Party(1,"name");
 
     public void addParty(ActionEvent actionEvent) throws SQLException {
-        part.setName_party(txtfldPartyName.getText());
-        baza.addParty(part);
+        boolean isThereSameParty = false;
+        for(int i=0;i<baza.getParty().size();i++){
+            if(baza.getParty().get(i).getName_party().equals(txtfldPartyName.getText())){
+                isThereSameParty=true;
+            }
+        }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Successful");
-        alert.setHeaderText("Dodavanje stranke");
-        alert.setContentText("Uspješno ste dodali stranku!");
+        if(txtfldPartyName.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error dialog");
+            alert.setHeaderText("Dodavanje stranke");
+            alert.setContentText("Neuspješno dodavanje stranke!");
+            alert.showAndWait();
+        }
 
-        alert.showAndWait();
-        baza.closeBase();
-        Stage zatvaranjePoruka = (Stage) txtfldPartyName.getScene().getWindow();
-        zatvaranjePoruka.close();
+        else if(isThereSameParty==true){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error dialog");
+            alert.setHeaderText("Neuspješno dodavanje stranke");
+            alert.setContentText("Unesena stranka već postoji!");
+            alert.showAndWait();
+        }
+        else {
+            part.setName_party(txtfldPartyName.getText());
+            baza.addParty(part);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Successful");
+            alert.setHeaderText("Dodavanje stranke");
+            alert.setContentText("Uspješno ste dodali stranku!");
+            alert.showAndWait();
+
+            baza.closeBase();
+            Stage zatvaranjePoruka = (Stage) txtfldPartyName.getScene().getWindow();
+            zatvaranjePoruka.close();
+        }
     }
 }

@@ -38,6 +38,8 @@ public class MainPageController {
     public ButtonBar buttonBarPhoto;
     VotingDAO baza = new VotingDAO();
     private Voters glasac = new Voters(1,"","");
+    public enum Validate{OK, NOTOK};
+    Validate validation;
 
     /*public MainPageController(VotingDAO baza) {
         this.baza=baza;
@@ -54,13 +56,21 @@ public class MainPageController {
 
     public void loginAdminButton(ActionEvent actionEvent) throws IOException, SQLException {
 
-        boolean isThereAdmin=false;
+        boolean isThereAdminName=false;
         for(int i=0;i<baza.getAdmin().size();i++) {
-            if (adminName.getText().equals(baza.getAdmin().get(i).getE_mail()) && adminPassword.getText().equals(baza.getAdmin().get(i).getPassword())) {
-                isThereAdmin=true;
+            if (adminName.getText().equals(baza.getAdmin().get(i).getE_mail())) {
+                isThereAdminName=true;
             }
         }
-        if(isThereAdmin) {
+
+        boolean isThereAdminPassword=false;
+        for(int i=0;i<baza.getAdmin().size();i++) {
+            if (adminPassword.getText().equals(baza.getAdmin().get(i).getPassword())) {
+                isThereAdminPassword=true;
+            }
+        }
+
+        if(isThereAdminName && isThereAdminPassword) {
             String pom ="";
             for(int i = 0; i <adminName.getText().length();i++){
                 if(adminName.getText().charAt(i)== '@') break;
@@ -78,8 +88,23 @@ public class MainPageController {
             zatvaranjePoruka.close();
             baza.closeBase();
         }
+        else if(isThereAdminName && !isThereAdminPassword){
+            adminPassword.getStyleClass().removeAll("poljeIspravno");
+            adminPassword.getStyleClass().add("poljeNijeIspravno");
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Greška prilikom registracije");
+            alert.setContentText("Neispravna lozinka!");
+            alert.showAndWait();
+        }
 
         else{
+            adminPassword.getStyleClass().removeAll("poljeIspravno");
+            adminPassword.getStyleClass().add("poljeNijeIspravno");
+            adminName.getStyleClass().removeAll("poljeIspravno");
+            adminName.getStyleClass().add("poljeNijeIspravno");
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Greška prilikom registracije");
@@ -117,23 +142,22 @@ public class MainPageController {
     }
 
     public void loginUserButton(ActionEvent actionEvent) throws IOException, SQLException {
-        boolean daLiJeOK = true;
-
+        validation = Validate.OK;
 
         if(userJMBG.getText().isEmpty() || !isJMBGOk(userJMBG.getText())){
             userJMBG.getStyleClass().removeAll("poljeIspravno");
             userJMBG.getStyleClass().add("poljeNijeIspravno");
-            daLiJeOK=false;
+            validation = Validate.NOTOK;
         }
 
         if(userNumber.getText().isEmpty()){
             userNumber.getStyleClass().removeAll("poljeIspravno");
             userNumber.getStyleClass().add("poljeNijeIspravno");
-            daLiJeOK=false;
+            validation = Validate.NOTOK;
         }
 
 
-        if(daLiJeOK) {
+        if(validation == Validate.OK) {
 
             glasac.setCard_number(userNumber.getText());
             glasac.setJmbg(userJMBG.getText());
@@ -165,7 +189,6 @@ public class MainPageController {
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Greska prilikom registracije");
                 alert.setContentText("Ovaj korisnik je vec galasao!");
-
                 alert.showAndWait();
             }
         }

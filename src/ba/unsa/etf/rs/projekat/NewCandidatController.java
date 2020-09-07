@@ -45,36 +45,47 @@ public class NewCandidatController {
     public void sacuvajAction(ActionEvent actionEvent) throws SQLException, IOException {
         int numbefOfCandidats = baza.getCandidats().size();
 
-        cand.setId(numbefOfCandidats+1);
-        cand.setParty_id(candidateParty.getSelectionModel().getSelectedItem());
-        cand.setName(candidateName.getText());
-        cand.setLastname(candidateLastname.getText());
-        cand.setBirth_date(candidateDate.getValue());
-        cand.setLiving_place(candidateLivingPlace.getText());
-        cand.setFunctions(candidateFunction.getSelectionModel().getSelectedItem());
-        cand.setVote_number(0);
+        if (candidateName.getText().isEmpty() || candidateLastname.getText().isEmpty() || candidateParty.getValue()==null ||
+                candidateLivingPlace.getText().isEmpty() || candidateFunction.getValue()==null) {
 
-        baza.addCandidate(cand);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error dialog");
+            alert.setHeaderText("Neuspješno dodavanje kandidata");
+            alert.setContentText("Niste popunili sva potrebna polja!");
+            alert.showAndWait();
+        }
+        else {
+            cand.setId(numbefOfCandidats + 1);
+            cand.setParty_id(candidateParty.getSelectionModel().getSelectedItem());
+            cand.setName(candidateName.getText());
+            cand.setLastname(candidateLastname.getText());
+            cand.setBirth_date(candidateDate.getValue());
+            cand.setLiving_place(candidateLivingPlace.getText());
+            cand.setFunctions(candidateFunction.getSelectionModel().getSelectedItem());
+            cand.setVote_number(0);
 
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Successful");
-        alert.setHeaderText("Dodavanje kandidata");
-        alert.setContentText("Uspjesno ste dodali kandidata!");
-
-        alert.showAndWait();
-        baza.closeBase();
-
-        Stage zatvaranjePoruka = (Stage) candidateFunction.getScene().getWindow();
-        zatvaranjePoruka.close();
+            baza.addCandidate(cand);
 
 
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Successful");
+            alert.setHeaderText("Dodavanje kandidata");
+            alert.setContentText("Uspjesno ste dodali kandidata!");
 
-        Stage noviProzor = new Stage();
-        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
-        noviProzor.setTitle("Dobrodosli");
-        Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-        noviProzor.setScene(scene);
-        noviProzor.show();
+            alert.showAndWait();
+            baza.closeBase();
+
+            Stage zatvaranjePoruka = (Stage) candidateFunction.getScene().getWindow();
+            zatvaranjePoruka.close();
+
+
+            Stage noviProzor = new Stage();
+            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
+            noviProzor.setTitle("Dobrodosli");
+            Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            noviProzor.setScene(scene);
+            noviProzor.show();
+
+        }
     }
 }

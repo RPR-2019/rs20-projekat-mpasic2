@@ -66,8 +66,7 @@ public class VotePageController implements Initializable {
 
 
     public void votePageBackAction(ActionEvent actionEvent) throws IOException, SQLException {
-
-        baza.deleteVoters(baza.numberOfVoters());
+        baza.deleteVoters(baza.numberOfVoters()-1);
 
             baza.closeBase();
             Stage noviProzor = new Stage();
@@ -183,7 +182,7 @@ public class VotePageController implements Initializable {
 
             //alert for succes
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Successful voting");
+            alert.setTitle("Successful");
             alert.setHeaderText("Uspješno ste glasali");
             alert.setContentText("Hvala Vam!");
             alert.showAndWait();
