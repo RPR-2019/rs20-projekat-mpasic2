@@ -5,13 +5,13 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Voters {
     SimpleIntegerProperty id;
-    SimpleStringProperty card_number;
+    SimpleStringProperty cardNumber;
     SimpleStringProperty jmbg;
 
 
-    public Voters(int id, String card_number, String jmbg) {
+    public Voters(int id, String cardNumber, String jmbg) {
         this.id = new SimpleIntegerProperty(id);
-        this.card_number = new SimpleStringProperty(card_number);
+        this.cardNumber = new SimpleStringProperty(cardNumber);
         this.jmbg = new SimpleStringProperty(jmbg);
     }
 
@@ -27,16 +27,16 @@ public class Voters {
         this.id.set(id);
     }
 
-    public String getCard_number() {
-        return card_number.get();
+    public String getCardNumber() {
+        return cardNumber.get();
     }
 
-    public SimpleStringProperty card_numberProperty() {
-        return card_number;
+    public SimpleStringProperty cardNumberProperty() {
+        return cardNumber;
     }
 
-    public void setCard_number(String card_number) {
-        this.card_number.set(card_number);
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber.set(cardNumber);
     }
 
     public String getJmbg() {

@@ -22,14 +22,14 @@ class AdminTest {
     @Test
     void getE_mail() {
         Admin admin = new Admin(1,"email@email.com","password");
-        assertEquals("email@email.com",admin.getE_mail());
+        assertEquals("email@email.com",admin.getEmail());
     }
 
     @Test
     void setE_mail() {
         Admin admin = new Admin(1,"email@email.com","password");
-        admin.setE_mail("meho@mehic.com");
-        assertEquals("meho@mehic.com",admin.getE_mail());
+        admin.setEmail("meho@mehic.com");
+        assertEquals("meho@mehic.com",admin.getEmail());
     }
 
     @Test

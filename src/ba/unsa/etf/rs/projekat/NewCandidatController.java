@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Observable;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
@@ -56,13 +55,13 @@ public class NewCandidatController {
         }
         else {
             cand.setId(numbefOfCandidats + 1);
-            cand.setParty_id(candidateParty.getSelectionModel().getSelectedItem());
+            cand.setPartyId(candidateParty.getSelectionModel().getSelectedItem());
             cand.setName(candidateName.getText());
             cand.setLastname(candidateLastname.getText());
-            cand.setBirth_date(candidateDate.getValue());
-            cand.setLiving_place(candidateLivingPlace.getText());
+            cand.setBirthDate(candidateDate.getValue());
+            cand.setLivingPlace(candidateLivingPlace.getText());
             cand.setFunctions(candidateFunction.getSelectionModel().getSelectedItem());
-            cand.setVote_number(0);
+            cand.setVoteNumber(0);
 
             baza.addCandidate(cand);
 

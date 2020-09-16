@@ -8,9 +8,10 @@ import java.sql.*;
 public class VotingDAO {
 
    // private static VotingDAO instance;
-    private Connection connection;
-    private PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,addVote,
-            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery,deleteVoterQuery,addNewPartyQuery,newPartyQuery,
+
+    private static Connection connection;
+    private static PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,addVote,
+            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery,deleteVoterQuery,addNewPartyQuery,newPartyQuery,deleteEverything,
             newQueryVotersDelete;
 
 
@@ -19,27 +20,31 @@ public class VotingDAO {
 
 
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:baza.db");
+            if (connection == null) {
+                connection = DriverManager.getConnection("jdbc:sqlite:baza.db");
+                findAdminQuery = connection.prepareStatement("SELECT * FROM admin;");
+                addNewUserQuery = connection.prepareStatement("INSERT INTO voters VALUES (?,?,?);");
+                findUserQuery = connection.prepareStatement("SELECT * FROM voters");
+                newQuery = connection.prepareStatement("SELECT MAX(id)+1 from voters; ");
+                getAllCandidats = connection.prepareStatement("SELECT * FROM candidats ORDER BY function, vote_number DESC, name");
+                getAllPartys = connection.prepareStatement("SELECT * FROM party");
+                getAllFunctions = connection.prepareStatement("SELECT * FROM functions");
+                QueryAllVotersNumber = connection.prepareStatement("SELECT COUNT(*) FROM voters");
+                newPasswordQuery = connection.prepareStatement("UPDATE admin SET password = ? WHERE e_mail = ?");
+                addNewAdmin = connection.prepareStatement("INSERT INTO admin VALUES(?,?,?);");
+                adminNewQuery = connection.prepareStatement("Select MAX(id)+1 from admin; ");
+                addVote = connection.prepareStatement("UPDATE candidats SET vote_number = ? WHERE id = ?;");
+                addNewCandidas = connection.prepareStatement("INSERT INTO candidats VALUES(?,?,?,?,?,?,?,?);");
+                newQueryCandidats = connection.prepareStatement("SELECT MAX(id)+1 from candidats; ");
+                howMuchVotesQuery = connection.prepareStatement("SELECT vote_number FROM candidats WHERE id = ?");
+                deleteVoterQuery = connection.prepareStatement("DELETE FROM voters WHERE id = ?");
+                addNewPartyQuery = connection.prepareStatement("INSERT INTO party VALUES(?,?);");
+                newPartyQuery = connection.prepareStatement("Select MAX(id)+1 from party; ");
+                newQueryVotersDelete = connection.prepareStatement("SELECT MAX(id) from voters; ");
+                //deleteEverything = connection.prepareStatement("DELETE FROM voters,candidats,party;");
+                //napravi vise upita!!!!!!!!!!!!!!!!!!!!!!
+            }
 
-            findAdminQuery = connection.prepareStatement("SELECT * FROM admin;");
-            addNewUserQuery = connection.prepareStatement("INSERT INTO voters VALUES (?,?,?);");
-            findUserQuery = connection.prepareStatement("SELECT * FROM voters");
-            newQuery = connection.prepareStatement("SELECT MAX(id)+1 from voters; ");
-            getAllCandidats = connection.prepareStatement("SELECT * FROM candidats ORDER BY function, vote_number DESC, name");
-            getAllPartys = connection.prepareStatement("SELECT * FROM party");
-            getAllFunctions = connection.prepareStatement("SELECT * FROM functions");
-            QueryAllVotersNumber = connection.prepareStatement("SELECT COUNT(*) FROM voters");
-            newPasswordQuery = connection.prepareStatement("UPDATE admin SET password = ? WHERE e_mail = ?");
-            addNewAdmin = connection.prepareStatement("INSERT INTO admin VALUES(?,?,?);");
-            adminNewQuery = connection.prepareStatement("Select MAX(id)+1 from admin; ");
-            addVote = connection.prepareStatement("UPDATE candidats SET vote_number = ? WHERE id = ?;");
-            addNewCandidas = connection.prepareStatement("INSERT INTO candidats VALUES(?,?,?,?,?,?,?,?);");
-            newQueryCandidats = connection.prepareStatement("SELECT MAX(id)+1 from candidats; ");
-            howMuchVotesQuery = connection.prepareStatement("SELECT vote_number FROM candidats WHERE id = ?");
-            deleteVoterQuery = connection.prepareStatement("DELETE FROM voters WHERE id = ?");
-            addNewPartyQuery = connection.prepareStatement("INSERT INTO party VALUES(?,?);");
-            newPartyQuery = connection.prepareStatement("Select MAX(id)+1 from party; ");
-            newQueryVotersDelete = connection.prepareStatement("SELECT MAX(id) from voters; ");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -152,7 +157,7 @@ public class VotingDAO {
                 vot.setId(1);
 
             addNewUserQuery.setInt(1,vot.getId());
-            addNewUserQuery.setString(2,vot.getCard_number());
+            addNewUserQuery.setString(2,vot.getCardNumber());
             addNewUserQuery.setString(3,vot.getJmbg());
 
             addNewUserQuery.execute();
@@ -231,7 +236,7 @@ public class VotingDAO {
                 ad.setId(1);
 
             addNewAdmin.setInt(1,ad.getId());
-            addNewAdmin.setString(2,ad.getE_mail());
+            addNewAdmin.setString(2,ad.getEmail());
             addNewAdmin.setString(3,ad.getPassword());
 
             addNewAdmin.execute();
@@ -253,13 +258,13 @@ public class VotingDAO {
                 cand.setId(1);
 
             addNewCandidas.setInt(1,cand.getId());
-            addNewCandidas.setInt(2,cand.getParty_id().getId());
+            addNewCandidas.setInt(2,cand.getPartyId().getId());
             addNewCandidas.setString(3,cand.getName());
             addNewCandidas.setString(4,cand.getLastname());
-            addNewCandidas.setDate(5, Date.valueOf(cand.getBirth_date()));
-            addNewCandidas.setString(6,cand.getLiving_place());
+            addNewCandidas.setDate(5, Date.valueOf(cand.getBirthDate()));
+            addNewCandidas.setString(6,cand.getLivingPlace());
             addNewCandidas.setInt(7,cand.getFunctions().getId());
-            addNewCandidas.setInt(8,cand.getVote_number());
+            addNewCandidas.setInt(8,cand.getVoteNumber());
 
             addNewCandidas.execute();
 
@@ -270,7 +275,7 @@ public class VotingDAO {
 
     public void addVotes(Candidats cand){
         try {
-            addVote.setInt(1,cand.getVote_number()+1);
+            addVote.setInt(1,cand.getVoteNumber()+1);
             addVote.setInt(2,cand.getId());
 
             addVote.execute();
@@ -283,6 +288,7 @@ public class VotingDAO {
 
     public void closeBase() throws SQLException {
         connection.close();
+        connection = null;
     }
 
     public void deleteVoters(int id){

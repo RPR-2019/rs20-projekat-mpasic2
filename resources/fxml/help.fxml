@@ -60,7 +60,7 @@
       <Label text="softvera te joj je to glavni i jedini " textFill="#000000" GridPane.rowIndex="8" />
       <Label text="cilj tačnije namjena. Iznad su navedeni  " textFill="#000000" GridPane.rowIndex="9" />
       <Label text="podaci kako o aplikaciji tako i o" textFill="#000000" GridPane.rowIndex="10" />
-      <Label text=" adminu koje u koliko budete imali" textFill="#000000" GridPane.rowIndex="11" />
+      <Label text="adminu koje u koliko budete imali" textFill="#000000" GridPane.rowIndex="11" />
       <Label text="kontaktiranja administratora." textFill="#000000" GridPane.rowIndex="14" />
       <Label text="bilo kakva pitanja, nedoumice ili slično " textFill="#000000" GridPane.rowIndex="12" />
       <Label text="budite slobodni da ih iskoristite u svrhu " textFill="#000000" GridPane.rowIndex="13" />

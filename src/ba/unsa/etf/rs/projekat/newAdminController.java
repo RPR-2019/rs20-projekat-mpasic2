@@ -15,7 +15,7 @@ public class newAdminController {
 
 
     public void newAdminAction(ActionEvent actionEvent) throws SQLException {
-        admin.setE_mail(newAAdminEmail.getText());
+        admin.setEmail(newAAdminEmail.getText());
         admin.setPassword(newAdminPassword.getText());
         baza.addAdmin(admin);
 

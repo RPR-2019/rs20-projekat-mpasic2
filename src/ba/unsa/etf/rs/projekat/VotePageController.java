@@ -51,17 +51,17 @@ public class VotePageController implements Initializable {
         tblPresident.setItems(baza.getPresidents());
         colPresidentNumber.setCellValueFactory(new PropertyValueFactory<>("id"));
         colPresidentName.setCellValueFactory(cellData -> Bindings.createStringBinding(() -> cellData.getValue().getName() + " " +cellData.getValue().getLastname()));
-        colPresidentParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getParty_id().getName_party()));
+        colPresidentParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPartyId().getName_party()));
 
         tblUnderPresident.setItems(baza.getUnderPresidents());
         colUnderPresidentNumber.setCellValueFactory(new PropertyValueFactory<>("id"));
         colUnderPresidentName.setCellValueFactory(cellData -> Bindings.createStringBinding(() -> cellData.getValue().getName() + " " +cellData.getValue().getLastname()));
-        colUnderPresidentParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getParty_id().getName_party()));
+        colUnderPresidentParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPartyId().getName_party()));
 
         tblDeputy.setItems(baza.getDeputy());
         colDeputyNumber.setCellValueFactory(new PropertyValueFactory<>("id"));
         colDeputyName.setCellValueFactory(cellData -> Bindings.createStringBinding(() -> cellData.getValue().getName() + " " +cellData.getValue().getLastname()));
-        colDeputyParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getParty_id().getName_party()));
+        colDeputyParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPartyId().getName_party()));
     }
 
 
@@ -87,15 +87,12 @@ public class VotePageController implements Initializable {
         boolean underPresidentOK = false;
         boolean deputyOK = false;
         for (int i=0;i<baza.getPresidents().size();i++){
-            //System.out.printf("Ovo je u bazi: " + baza.getPresidents().get(i).getId() + "\n");
-            //System.out.printf("Ovo je u txt-u: " + txtfldPresident.getText() + "\n");
             if(valueOf(txtfldPresident.getText())==baza.getPresidents().get(i).getId()){
                 predsjednik=baza.getPresidents().get(i);
                 presidentOK=true;}
 
         }
         for (int i=0;i<baza.getUnderPresidents().size();i++){
-            //System.out.printf("Ovo je u bazi: " + baza.getUnderPresidents().get(i).getId() + "\n");
             if(valueOf(txtfldUnderPresident.getText())==baza.getUnderPresidents().get(i).getId()){
                 potpredsjednik=baza.getUnderPresidents().get(i);
                 underPresidentOK=true;}
@@ -180,7 +177,6 @@ public class VotePageController implements Initializable {
 
             baza.closeBase();
 
-            //alert for succes
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Successful");
             alert.setHeaderText("Uspješno ste glasali");

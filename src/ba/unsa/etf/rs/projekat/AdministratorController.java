@@ -35,21 +35,27 @@ public class AdministratorController implements Initializable {
     public TableColumn<Candidats,String> colJMBG;
     public VotingDAO baza = new VotingDAO();
 
+    public AdministratorController() {
+    }
+
+    public AdministratorController(String model) {
+        super();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tblCandidats.setItems(baza.getCandidats());
         //colMan.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getManufacturer().getName()));
-        colParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getParty_id().getName_party()));
+        colParty.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPartyId().getName_party()));
         //colParty.setCellValueFactory(data -> (ObservableValue<String>) new PropertyValueFactory(data.getValue().getParty_id().getName_party()));
         colCandidats.setCellValueFactory(cellData -> Bindings.createStringBinding(() -> cellData.getValue().getName()+" "+cellData.getValue().getLastname()));
-        colNumberVote.setCellValueFactory(new PropertyValueFactory<>("vote_number"));
+        colNumberVote.setCellValueFactory(new PropertyValueFactory<>("voteNumber"));
         //colFunction.setCellValueFactory(data -> (ObservableValue<String>) new PropertyValueFactory(data.getValue().getFunctions().getFunction_name()));
         colFunction.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFunctions().getFunction_name()));
 
 
         tblVoters.setItems(baza.getUsers());
-        colUserNumber.setCellValueFactory(new PropertyValueFactory<>("card_number"));
+        colUserNumber.setCellValueFactory(new PropertyValueFactory<>("cardNumber"));
         colJMBG.setCellValueFactory(new PropertyValueFactory<>("jmbg"));
     }
 
@@ -73,29 +79,29 @@ public class AdministratorController implements Initializable {
         int conterDeputy = 0;
         int maxPred=0;
         for(int i=0;i<baza.getPresidents().size();i++){
-            if(baza.getPresidents().get(i).getVote_number() > baza.getPresidents().get(maxPred).getVote_number())
+            if(baza.getPresidents().get(i).getVoteNumber() > baza.getPresidents().get(maxPred).getVoteNumber())
                 maxPred=i;
         }
         int maxPotpred=0;
         for(int i=0;i<baza.getUnderPresidents().size();i++){
-            if(baza.getUnderPresidents().get(i).getVote_number() > baza.getUnderPresidents().get(maxPotpred).getVote_number())
+            if(baza.getUnderPresidents().get(i).getVoteNumber() > baza.getUnderPresidents().get(maxPotpred).getVoteNumber())
                 maxPotpred=i;
         }
         int maxDeputy=0;
         for(int i=0;i<baza.getDeputy().size();i++){
-            if(baza.getDeputy().get(i).getVote_number() > baza.getDeputy().get(maxDeputy).getVote_number())
+            if(baza.getDeputy().get(i).getVoteNumber() > baza.getDeputy().get(maxDeputy).getVoteNumber())
                 maxDeputy=i;
         }
         for(int i=0;i<baza.getPresidents().size();i++){
-            if(baza.getPresidents().get(i).getVote_number() == baza.getPresidents().get(maxPred).getVote_number())
+            if(baza.getPresidents().get(i).getVoteNumber() == baza.getPresidents().get(maxPred).getVoteNumber())
                 counderPresident=counderPresident+1;
         }
         for(int i=0;i<baza.getUnderPresidents().size();i++){
-            if(baza.getUnderPresidents().get(i).getVote_number() == baza.getUnderPresidents().get(maxPotpred).getVote_number())
+            if(baza.getUnderPresidents().get(i).getVoteNumber() == baza.getUnderPresidents().get(maxPotpred).getVoteNumber())
                 counterUnderPresident=counterUnderPresident+1;
         }
         for(int i=0;i<baza.getDeputy().size();i++){
-            if(baza.getDeputy().get(i).getVote_number() == baza.getDeputy().get(maxDeputy).getVote_number())
+            if(baza.getDeputy().get(i).getVoteNumber() == baza.getDeputy().get(maxDeputy).getVoteNumber())
                 conterDeputy=conterDeputy+1;
         }
 

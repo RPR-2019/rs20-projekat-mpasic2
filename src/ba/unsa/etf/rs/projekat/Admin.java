@@ -5,16 +5,14 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Admin {
     SimpleIntegerProperty id;
-    SimpleStringProperty e_mail;
+    SimpleStringProperty email;
     SimpleStringProperty password;
 
-    public Admin(int id, String e_mail, String password) {
+    public Admin(int id, String email, String password) {
         this.id = new SimpleIntegerProperty(id);
-        this.e_mail = new SimpleStringProperty(e_mail);
+        this.email = new SimpleStringProperty(email);
         this.password = new SimpleStringProperty(password);
     }
-
-    //all setters and getters
 
     public int getId() {
         return id.get();
@@ -28,16 +26,16 @@ public class Admin {
         this.id.set(id);
     }
 
-    public String getE_mail() {
-        return e_mail.get();
+    public String getEmail() {
+        return email.get();
     }
 
-    public SimpleStringProperty e_mailProperty() {
-        return e_mail;
+    public SimpleStringProperty emailProperty() {
+        return email;
     }
 
-    public void setE_mail(String e_mail) {
-        this.e_mail.set(e_mail);
+    public void setEmail(String email) {
+        this.email.set(email);
     }
 
     public String getPassword() {

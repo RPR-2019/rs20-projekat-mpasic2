@@ -1,14 +1,9 @@
 package ba.unsa.etf.rs.projekat;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,30 +27,30 @@ public class WinnersController implements Initializable {
         //checking the base to find who of candidats has the most of votes
         int maxPred=0;
         for(int i=0;i<baza.getPresidents().size();i++){
-            if(baza.getPresidents().get(i).getVote_number() > baza.getPresidents().get(maxPred).getVote_number())
+            if(baza.getPresidents().get(i).getVoteNumber() > baza.getPresidents().get(maxPred).getVoteNumber())
                 maxPred=i;
         }
         int maxPotpred=0;
         for(int i=0;i<baza.getUnderPresidents().size();i++){
-            if(baza.getUnderPresidents().get(i).getVote_number() > baza.getUnderPresidents().get(maxPotpred).getVote_number())
+            if(baza.getUnderPresidents().get(i).getVoteNumber() > baza.getUnderPresidents().get(maxPotpred).getVoteNumber())
                 maxPotpred=i;
         }
         int maxDeputy=0;
         for(int i=0;i<baza.getDeputy().size();i++){
-            if(baza.getDeputy().get(i).getVote_number() > baza.getDeputy().get(maxDeputy).getVote_number())
+            if(baza.getDeputy().get(i).getVoteNumber() > baza.getDeputy().get(maxDeputy).getVoteNumber())
                 maxDeputy=i;
         }
         //we need to check if some candidats have equal number of votes
         for(int i=0;i<baza.getPresidents().size();i++){
-            if(baza.getPresidents().get(i).getVote_number() == baza.getPresidents().get(maxPred).getVote_number())
+            if(baza.getPresidents().get(i).getVoteNumber() == baza.getPresidents().get(maxPred).getVoteNumber())
                 counderPresident=counderPresident+1;
         }
         for(int i=0;i<baza.getUnderPresidents().size();i++){
-            if(baza.getUnderPresidents().get(i).getVote_number() == baza.getUnderPresidents().get(maxPotpred).getVote_number())
+            if(baza.getUnderPresidents().get(i).getVoteNumber() == baza.getUnderPresidents().get(maxPotpred).getVoteNumber())
                 counterUnderPresident=counterUnderPresident+1;
         }
         for(int i=0;i<baza.getDeputy().size();i++){
-            if(baza.getDeputy().get(i).getVote_number() == baza.getDeputy().get(maxDeputy).getVote_number())
+            if(baza.getDeputy().get(i).getVoteNumber() == baza.getDeputy().get(maxDeputy).getVoteNumber())
                 conterDeputy=conterDeputy+1;
         }
 
@@ -74,9 +69,9 @@ public class WinnersController implements Initializable {
             winnerPresident.setText(baza.getPresidents().get(maxPred).getName() + " " + baza.getPresidents().get(maxPred).getLastname());
             winnerUnderPresident.setText(baza.getUnderPresidents().get(maxPotpred).getName() + " " + baza.getUnderPresidents().get(maxPotpred).getLastname());
             winnerDeputy.setText(baza.getDeputy().get(maxDeputy).getName() + " " + baza.getDeputy().get(maxDeputy).getLastname());
-            winnerPresidentVotes.setText(String.valueOf(baza.getPresidents().get(maxPred).getVote_number()));
-            winnerUnderPresidentVotes.setText(String.valueOf(baza.getUnderPresidents().get(maxPotpred).getVote_number()));
-            winnerDeputyVotes.setText(String.valueOf(baza.getDeputy().get(maxDeputy).getVote_number()));
+            winnerPresidentVotes.setText(String.valueOf(baza.getPresidents().get(maxPred).getVoteNumber()));
+            winnerUnderPresidentVotes.setText(String.valueOf(baza.getUnderPresidents().get(maxPotpred).getVoteNumber()));
+            winnerDeputyVotes.setText(String.valueOf(baza.getDeputy().get(maxDeputy).getVoteNumber()));
         }
     }
 

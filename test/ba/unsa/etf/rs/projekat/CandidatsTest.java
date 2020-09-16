@@ -30,7 +30,7 @@ class CandidatsTest {
         Party part = new Party(5,"aaa");
         Functions fun = new Functions(4,"king");
         Candidats cand = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
-        assertEquals(5,cand.getParty_id().getId());
+        assertEquals(5,cand.getPartyId().getId());
     }
 
     @Test
@@ -39,8 +39,8 @@ class CandidatsTest {
         Party newParty = new Party(2,"newParty");
         Functions fun = new Functions(4,"king");
         Candidats cand = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
-        cand.setParty_id(newParty);
-        assertEquals(2,cand.getParty_id().getId());
+        cand.setPartyId(newParty);
+        assertEquals(2,cand.getPartyId().getId());
     }
 
     @Test
@@ -82,7 +82,7 @@ class CandidatsTest {
         Party part = new Party(5,"aaa");
         Functions fun = new Functions(4,"king");
         Candidats cand = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
-        assertEquals(LocalDate.now(),cand.getBirth_date());
+        assertEquals(LocalDate.now(),cand.getBirthDate());
     }
 
     @Test
@@ -90,8 +90,8 @@ class CandidatsTest {
         Party part = new Party(5,"aaa");
         Functions fun = new Functions(4,"king");
         Candidats cand = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
-        cand.setBirth_date(LocalDate.of(2018, 11, 17));
-        assertEquals(LocalDate.of(2018, 11, 17),cand.getBirth_date());
+        cand.setBirthDate(LocalDate.of(2018, 11, 17));
+        assertEquals(LocalDate.of(2018, 11, 17),cand.getBirthDate());
     }
 
     @Test
@@ -99,7 +99,7 @@ class CandidatsTest {
         Party part = new Party(5,"aaa");
         Functions fun = new Functions(4,"king");
         Candidats cand = new Candidats(1,part,"1","2", LocalDate.now(),"place",fun,3);
-        assertEquals("place",cand.getLiving_place());
+        assertEquals("place",cand.getLivingPlace());
     }
 
     @Test
@@ -107,8 +107,8 @@ class CandidatsTest {
         Party part = new Party(5,"aaa");
         Functions fun = new Functions(4,"king");
         Candidats cand = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
-        cand.setLiving_place("Visoko");
-        assertEquals("Visoko",cand.getLiving_place());
+        cand.setLivingPlace("Visoko");
+        assertEquals("Visoko",cand.getLivingPlace());
     }
 
     @Test
@@ -134,7 +134,7 @@ class CandidatsTest {
         Party part = new Party(5,"aaa");
         Functions fun = new Functions(4,"king");
         Candidats cand = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
-        assertEquals(3,cand.getVote_number());
+        assertEquals(3,cand.getVoteNumber());
     }
 
     @Test
@@ -142,7 +142,7 @@ class CandidatsTest {
         Party part = new Party(5,"aaa");
         Functions fun = new Functions(4,"king");
         Candidats cand = new Candidats(1,part,"1","2", LocalDate.now(),"1",fun,3);
-        cand.setVote_number(0);
-        assertEquals(0,cand.getVote_number());
+        cand.setVoteNumber(0);
+        assertEquals(0,cand.getVoteNumber());
     }
 }

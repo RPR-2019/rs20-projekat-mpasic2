@@ -1,9 +1,7 @@
 package ba.unsa.etf.rs.projekat;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,16 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 import javafx.stage.StageStyle;
 
-
-import javax.swing.*;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
@@ -58,7 +51,7 @@ public class MainPageController {
 
         boolean isThereAdminName=false;
         for(int i=0;i<baza.getAdmin().size();i++) {
-            if (adminName.getText().equals(baza.getAdmin().get(i).getE_mail())) {
+            if (adminName.getText().equals(baza.getAdmin().get(i).getEmail())) {
                 isThereAdminName=true;
             }
         }
@@ -159,11 +152,11 @@ public class MainPageController {
 
         if(validation == Validate.OK) {
 
-            glasac.setCard_number(userNumber.getText());
+            glasac.setCardNumber(userNumber.getText());
             glasac.setJmbg(userJMBG.getText());
             boolean sveUredu = true;
             for(int i=0;i<baza.getUsers().size();i++){
-                if(userNumber.getText().equals(baza.getUsers().get(i).getCard_number()))
+                if(userNumber.getText().equals(baza.getUsers().get(i).getCardNumber()))
                         sveUredu=false;
                 if(userJMBG.getText().equals(baza.getUsers().get(i).getJmbg()))
                     sveUredu=false;
@@ -206,7 +199,6 @@ public class MainPageController {
     }
 
     public void closeMainPageButton(ActionEvent actionEvent) throws IOException {
-        //baza.deleteInstance(); ovo je za bazu kada je dodam
         Stage zatvaranjePoruka=(Stage)adminName.getScene().getWindow();
         zatvaranjePoruka.close();
     }
