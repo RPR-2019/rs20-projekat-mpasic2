@@ -82,63 +82,12 @@ public class VotePageController implements Initializable {
     }
 
 
-    public void onActionSacuvaj(ActionEvent actionEvent) throws IOException, SQLException {
+    public void onActionSave(ActionEvent actionEvent) throws IOException, SQLException {
         boolean presidentOK = false;
         boolean underPresidentOK = false;
         boolean deputyOK = false;
-        for (int i=0;i<baza.getPresidents().size();i++){
-            if(valueOf(txtfldPresident.getText())==baza.getPresidents().get(i).getId()){
-                predsjednik=baza.getPresidents().get(i);
-                presidentOK=true;}
-
-        }
-        for (int i=0;i<baza.getUnderPresidents().size();i++){
-            if(valueOf(txtfldUnderPresident.getText())==baza.getUnderPresidents().get(i).getId()){
-                potpredsjednik=baza.getUnderPresidents().get(i);
-                underPresidentOK=true;}
-
-        }
-        for (int i=0;i<baza.getDeputy().size();i++){
-            if(valueOf(txtfldDeputy.getText())==baza.getDeputy().get(i).getId()){
-                zamjenik=baza.getDeputy().get(i);
-                deputyOK=true;}
-
-        }
-
-        if(txtfldPresident.getText().isEmpty() || txtfldUnderPresident.getText().isEmpty() || txtfldDeputy.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Greška prilikom glasanja");
-            alert.setContentText("Niste popunili sva polja!");
-
-            if(txtfldPresident.getText().isEmpty() ){
-                txtfldPresident.getStyleClass().removeAll("poljeIspravno");
-                txtfldPresident.getStyleClass().add("poljeNijeIspravno");
-            }
-            if(txtfldUnderPresident.getText().isEmpty() ){
-                txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
-                txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
-            }
-            if(txtfldDeputy.getText().isEmpty() ){
-                txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
-                txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
-            }
-            //kad je uredu
-            if(!txtfldPresident.getText().isEmpty() ){
-                txtfldPresident.getStyleClass().removeAll("poljeNijeIspravno");
-            }
-            if(!txtfldUnderPresident.getText().isEmpty() ){
-                txtfldUnderPresident.getStyleClass().removeAll("poljeNijeIspravno");
-            }
-            if(!txtfldDeputy.getText().isEmpty() ){
-                txtfldDeputy.getStyleClass().removeAll("poljeNijeIspravno");
-            }
-
-            alert.showAndWait();
-        }
-        //kad nije prazno ali uneseni podaci nisu validni
-
-        if(!presidentOK){
+        boolean everythingOK = true;
+        if (txtfldPresident.getText() == "" || txtfldUnderPresident.getText() == "" || txtfldDeputy.getText() == "") {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Greška prilikom glasanja");
@@ -147,53 +96,122 @@ public class VotePageController implements Initializable {
 
             txtfldPresident.getStyleClass().removeAll("poljeIspravno");
             txtfldPresident.getStyleClass().add("poljeNijeIspravno");
+            everythingOK = false;
         }
-        if(!underPresidentOK){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Greška prilikom glasanja");
-            alert.setContentText("Neispravno glasanje!");
-            alert.showAndWait();
 
-            txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
-            txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
-        }
-        if(!deputyOK){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Greška prilikom glasanja");
-            alert.setContentText("Neispravno glasanje!");
-            alert.showAndWait();
+        if (everythingOK) {
+            for (int i = 0; i < baza.getPresidents().size(); i++) {
+                if (valueOf(txtfldPresident.getText()) == baza.getPresidents().get(i).getId()) {
+                    predsjednik = baza.getPresidents().get(i);
+                    presidentOK = true;
+                }
 
-            txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
-            txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
-        }
-        if(presidentOK && underPresidentOK && deputyOK) {
+            }
+            for (int i = 0; i < baza.getUnderPresidents().size(); i++) {
+                if (valueOf(txtfldUnderPresident.getText()) == baza.getUnderPresidents().get(i).getId()) {
+                    potpredsjednik = baza.getUnderPresidents().get(i);
+                    underPresidentOK = true;
+                }
+
+            }
+            for (int i = 0; i < baza.getDeputy().size(); i++) {
+                if (valueOf(txtfldDeputy.getText()) == baza.getDeputy().get(i).getId()) {
+                    zamjenik = baza.getDeputy().get(i);
+                    deputyOK = true;
+                }
+
+            }
+
+            if (txtfldPresident.getText().isEmpty() || txtfldUnderPresident.getText().isEmpty() || txtfldDeputy.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Greška prilikom glasanja");
+                alert.setContentText("Niste popunili sva polja!");
+
+                if (txtfldPresident.getText().isEmpty()) {
+                    txtfldPresident.getStyleClass().removeAll("poljeIspravno");
+                    txtfldPresident.getStyleClass().add("poljeNijeIspravno");
+                }
+                if (txtfldUnderPresident.getText().isEmpty()) {
+                    txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
+                    txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
+                }
+                if (txtfldDeputy.getText().isEmpty()) {
+                    txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
+                    txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
+                }
+                //when everything is okey
+                if (!txtfldPresident.getText().isEmpty()) {
+                    txtfldPresident.getStyleClass().removeAll("poljeNijeIspravno");
+                }
+                if (!txtfldUnderPresident.getText().isEmpty()) {
+                    txtfldUnderPresident.getStyleClass().removeAll("poljeNijeIspravno");
+                }
+                if (!txtfldDeputy.getText().isEmpty()) {
+                    txtfldDeputy.getStyleClass().removeAll("poljeNijeIspravno");
+                }
+
+                alert.showAndWait();
+            }
+            //when is not empty but insert data is wrong
+
+            if (!presidentOK) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Greška prilikom glasanja");
+                alert.setContentText("Neispravno glasanje!");
+                alert.showAndWait();
+
+                txtfldPresident.getStyleClass().removeAll("poljeIspravno");
+                txtfldPresident.getStyleClass().add("poljeNijeIspravno");
+            }
+            if (!underPresidentOK) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Greška prilikom glasanja");
+                alert.setContentText("Neispravno glasanje!");
+                alert.showAndWait();
+
+                txtfldUnderPresident.getStyleClass().removeAll("poljeIspravno");
+                txtfldUnderPresident.getStyleClass().add("poljeNijeIspravno");
+            }
+            if (!deputyOK) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Greška prilikom glasanja");
+                alert.setContentText("Neispravno glasanje!");
+                alert.showAndWait();
+
+                txtfldDeputy.getStyleClass().removeAll("poljeIspravno");
+                txtfldDeputy.getStyleClass().add("poljeNijeIspravno");
+            }
+            if (presidentOK && underPresidentOK && deputyOK) {
 
 
-            baza.addVotes(predsjednik);
-            baza.addVotes(potpredsjednik);
-            baza.addVotes(zamjenik);
+                baza.addVotes(predsjednik);
+                baza.addVotes(potpredsjednik);
+                baza.addVotes(zamjenik);
 
-            baza.closeBase();
+                baza.closeBase();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Successful");
-            alert.setHeaderText("Uspješno ste glasali");
-            alert.setContentText("Hvala Vam!");
-            alert.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Information dialog");
+                alert.setHeaderText("Uspješno ste glasali");
+                alert.setContentText("Hvala Vam!");
+                alert.showAndWait();
 
-            Stage noviProzor = new Stage();
-            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
-            noviProzor.setTitle("E-glasanje");
-            Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            noviProzor.setScene(scene);
-            noviProzor.show();
+                Stage noviProzor = new Stage();
+                Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
+                noviProzor.setTitle("E-glasanje");
+                Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+                noviProzor.setScene(scene);
+                noviProzor.show();
 
-            Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
-            zatvaranjePoruka.close();
+                Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
+                zatvaranjePoruka.close();
 
 
+            }
         }
     }
 }

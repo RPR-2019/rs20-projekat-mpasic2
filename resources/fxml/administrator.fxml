@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.AdministratorController">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.AdministratorController">
    <center>
       <GridPane fx:id="mainGridAdmin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
           <stylesheets>
@@ -55,7 +55,7 @@
                     <Font name="System Bold" size="12.0" />
                 </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#backButtonAction" text="Povratak" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Button fx:id="backToMainPage" mnemonicParsing="false" onAction="#backButtonAction" text="Povratak" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="189.0" />
                </GridPane.margin>
@@ -82,7 +82,7 @@
           </Menu>
           <Menu mnemonicParsing="true" text="_Help">
             <items>
-              <MenuItem mnemonicParsing="true" onAction="#helpOnAction" text="_Kontakt" />
+              <MenuItem mnemonicParsing="true" onAction="#helpOnAction" text="_Contact" />
             </items>
           </Menu>
         </menus>

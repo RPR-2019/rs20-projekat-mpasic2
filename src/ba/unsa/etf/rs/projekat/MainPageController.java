@@ -161,6 +161,7 @@ public class MainPageController {
                 if(userJMBG.getText().equals(baza.getUsers().get(i).getJmbg()))
                     sveUredu=false;
             }
+
             if(sveUredu) {
 
                 baza.addUser(glasac);

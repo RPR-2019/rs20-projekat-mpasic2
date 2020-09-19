@@ -20,7 +20,7 @@ public class newPasswordController {
 
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful");
+            alert.setTitle("Information dialog");
             alert.setHeaderText("Uspjesno");
             alert.setContentText("Uspjesno promjenjena lozinka!");
 

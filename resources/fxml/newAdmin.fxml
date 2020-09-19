@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:id="newAdminGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.newAdminController">
+<GridPane fx:id="newAdminGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.newAdminController">
     <stylesheets>
         <URL value="@/css/edit.css" />
     </stylesheets>
@@ -30,7 +30,7 @@
          </font></Label>
       <TextField fx:id="newAAdminEmail" GridPane.columnIndex="1" />
       <PasswordField fx:id="newAdminPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" onAction="#newAdminAction" text="Dodaj" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#newAdminAction" text="Dodaj" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

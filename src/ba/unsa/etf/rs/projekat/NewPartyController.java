@@ -40,7 +40,7 @@ public class NewPartyController {
             baza.addParty(part);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful");
+            alert.setTitle("Information dialog");
             alert.setHeaderText("Dodavanje stranke");
             alert.setContentText("Uspješno ste dodali stranku!");
             alert.showAndWait();

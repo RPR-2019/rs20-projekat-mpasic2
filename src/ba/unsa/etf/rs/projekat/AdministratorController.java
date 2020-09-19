@@ -74,57 +74,85 @@ public class AdministratorController implements Initializable {
     }
 
     public void finishVoting(ActionEvent actionEvent) throws IOException {
-        int counderPresident = 0;
-        int counterUnderPresident = 0;
-        int conterDeputy = 0;
-        int maxPred=0;
-        for(int i=0;i<baza.getPresidents().size();i++){
-            if(baza.getPresidents().get(i).getVoteNumber() > baza.getPresidents().get(maxPred).getVoteNumber())
-                maxPred=i;
-        }
-        int maxPotpred=0;
-        for(int i=0;i<baza.getUnderPresidents().size();i++){
-            if(baza.getUnderPresidents().get(i).getVoteNumber() > baza.getUnderPresidents().get(maxPotpred).getVoteNumber())
-                maxPotpred=i;
-        }
-        int maxDeputy=0;
-        for(int i=0;i<baza.getDeputy().size();i++){
-            if(baza.getDeputy().get(i).getVoteNumber() > baza.getDeputy().get(maxDeputy).getVoteNumber())
-                maxDeputy=i;
-        }
-        for(int i=0;i<baza.getPresidents().size();i++){
-            if(baza.getPresidents().get(i).getVoteNumber() == baza.getPresidents().get(maxPred).getVoteNumber())
-                counderPresident=counderPresident+1;
-        }
-        for(int i=0;i<baza.getUnderPresidents().size();i++){
-            if(baza.getUnderPresidents().get(i).getVoteNumber() == baza.getUnderPresidents().get(maxPotpred).getVoteNumber())
-                counterUnderPresident=counterUnderPresident+1;
-        }
-        for(int i=0;i<baza.getDeputy().size();i++){
-            if(baza.getDeputy().get(i).getVoteNumber() == baza.getDeputy().get(maxDeputy).getVoteNumber())
-                conterDeputy=conterDeputy+1;
-        }
 
-        if(counderPresident>1 || counterUnderPresident>1 || conterDeputy>1){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Info");
-            alert.setHeaderText("Postoje kandidati koji imaju jednak broj glasova!");
+        if(baza.getCandidats().size()==0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Nije moguće izvršiti brisanje!");
+            alert.setHeaderText("Baza podataka je već prazna");
             alert.setContentText("Molimo kontaktirajte administraotora");
 
             alert.showAndWait();
+        }
+        else {
+            int counderPresident = 0;
+            int counterUnderPresident = 0;
+            int conterDeputy = 0;
+            int maxPred = 0;
+            for (int i = 0; i < baza.getPresidents().size(); i++) {
+                if (baza.getPresidents().get(i).getVoteNumber() > baza.getPresidents().get(maxPred).getVoteNumber())
+                    maxPred = i;
+            }
+            int maxPotpred = 0;
+            for (int i = 0; i < baza.getUnderPresidents().size(); i++) {
+                if (baza.getUnderPresidents().get(i).getVoteNumber() > baza.getUnderPresidents().get(maxPotpred).getVoteNumber())
+                    maxPotpred = i;
+            }
+            int maxDeputy = 0;
+            for (int i = 0; i < baza.getDeputy().size(); i++) {
+                if (baza.getDeputy().get(i).getVoteNumber() > baza.getDeputy().get(maxDeputy).getVoteNumber())
+                    maxDeputy = i;
+            }
+            for (int i = 0; i < baza.getPresidents().size(); i++) {
+                if (baza.getPresidents().get(i).getVoteNumber() == baza.getPresidents().get(maxPred).getVoteNumber())
+                    counderPresident = counderPresident + 1;
+            }
+            for (int i = 0; i < baza.getUnderPresidents().size(); i++) {
+                if (baza.getUnderPresidents().get(i).getVoteNumber() == baza.getUnderPresidents().get(maxPotpred).getVoteNumber())
+                    counterUnderPresident = counterUnderPresident + 1;
+            }
+            for (int i = 0; i < baza.getDeputy().size(); i++) {
+                if (baza.getDeputy().get(i).getVoteNumber() == baza.getDeputy().get(maxDeputy).getVoteNumber())
+                    conterDeputy = conterDeputy + 1;
+            }
+
+            if (counderPresident > 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Info");
+                alert.setHeaderText("Postoje kandidati koji imaju jednak broj glasova!");
+                alert.setContentText("Molimo kontaktirajte administraotora");
+
+                alert.showAndWait();
+
+            } else if (counterUnderPresident > 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Info");
+                alert.setHeaderText("Postoje kandidati koji imaju jednak broj glasova!");
+                alert.setContentText("Molimo kontaktirajte administraotora");
+
+                alert.showAndWait();
+            } else if (conterDeputy > 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Info");
+                alert.setHeaderText("Postoje kandidati koji imaju jednak broj glasova!");
+                alert.setContentText("Molimo kontaktirajte administraotora");
+
+                alert.showAndWait();
+            } else {
+                Stage noviProzor = new Stage();
+                Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/winners.fxml"));
+                noviProzor.setTitle("Izvještaj");
+                Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+                noviProzor.setScene(scene);
+                noviProzor.show();
+
+                Stage zatvaranjePoruka = (Stage) mainGridAdmin.getScene().getWindow();
+                zatvaranjePoruka.close();
+
+                baza.deleteEverything();
+            }
 
         }
-        else{
-            Stage noviProzor = new Stage();
-            Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/winners.fxml"));
-            noviProzor.setTitle("Izvještaj");
-            Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            noviProzor.setScene(scene);
-            noviProzor.show();
 
-            Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
-            zatvaranjePoruka.close();
-        }
 
 
     }

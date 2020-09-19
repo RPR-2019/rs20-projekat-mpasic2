@@ -1,6 +1,7 @@
 package ba.unsa.etf.rs.projekat;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,6 +19,13 @@ public class newAdminController {
         admin.setEmail(newAAdminEmail.getText());
         admin.setPassword(newAdminPassword.getText());
         baza.addAdmin(admin);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information dialog");
+        alert.setHeaderText("Uspjesno");
+        alert.setContentText("Uspjesno dodan administrator!");
+
+        alert.showAndWait();
 
         baza.closeBase();
 

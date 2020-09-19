@@ -9,15 +9,12 @@ public class VotingDAO {
 
    // private static VotingDAO instance;
 
-    private static Connection connection;
+    private Connection connection;
     private static PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,addVote,
-            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery,deleteVoterQuery,addNewPartyQuery,newPartyQuery,deleteEverything,
-            newQueryVotersDelete;
-
+            addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery,deleteVoterQuery,addNewPartyQuery,newPartyQuery,
+            newQueryVotersDelete, deleteAllVoters, deleteAllCandidats, deleteAdminQuery;
 
     public VotingDAO() {
-
-
 
         try {
             if (connection == null) {
@@ -26,7 +23,7 @@ public class VotingDAO {
                 addNewUserQuery = connection.prepareStatement("INSERT INTO voters VALUES (?,?,?);");
                 findUserQuery = connection.prepareStatement("SELECT * FROM voters");
                 newQuery = connection.prepareStatement("SELECT MAX(id)+1 from voters; ");
-                getAllCandidats = connection.prepareStatement("SELECT * FROM candidats ORDER BY function, vote_number DESC, name");
+                getAllCandidats = connection.prepareStatement("SELECT * FROM candidats ORDER BY function, vote_number DESC, name;");
                 getAllPartys = connection.prepareStatement("SELECT * FROM party");
                 getAllFunctions = connection.prepareStatement("SELECT * FROM functions");
                 QueryAllVotersNumber = connection.prepareStatement("SELECT COUNT(*) FROM voters");
@@ -41,8 +38,9 @@ public class VotingDAO {
                 addNewPartyQuery = connection.prepareStatement("INSERT INTO party VALUES(?,?);");
                 newPartyQuery = connection.prepareStatement("Select MAX(id)+1 from party; ");
                 newQueryVotersDelete = connection.prepareStatement("SELECT MAX(id) from voters; ");
-                //deleteEverything = connection.prepareStatement("DELETE FROM voters,candidats,party;");
-                //napravi vise upita!!!!!!!!!!!!!!!!!!!!!!
+                deleteAllVoters = connection.prepareStatement("DELETE FROM voters;");
+                deleteAllCandidats = connection.prepareStatement("DELETE FROM candidats;");
+                deleteAdminQuery = connection.prepareStatement("DELETE FROM admin WHERE id=?");
             }
 
 
@@ -322,6 +320,28 @@ public class VotingDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void deleteEverything(){
+
+        try {
+            deleteAllVoters.execute();
+            deleteAllCandidats.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    public void deleteAdmin(){
+        int id = getAdmin().size();
+        try {
+            deleteAdminQuery.setInt(1,id);
+            deleteAdminQuery.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
