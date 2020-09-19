@@ -45,6 +45,7 @@ public class AdministratorControllerTest {
     @Test
     public void newAdminTest(FxRobot robot) {
         robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.A).press(KeyCode.ENTER);
+        robot.lookup("#newAAdminEmail").tryQuery().isPresent();
         robot.clickOn("#newAAdminEmail");
         robot.write("NoviAdmin");
         robot.clickOn("#newAdminPassword");
@@ -107,6 +108,13 @@ public class AdministratorControllerTest {
 
         Button button = robot.lookup("#loginAdmin").queryAs(Button.class);
         assertNotEquals(null,button);
+    }
+
+    @Test
+    public void finishVotingTest(FxRobot robot){
+        robot.clickOn("#finishVotingBtn");
+        robot.press(KeyCode.ENTER);
+        assertFalse(theStage.isShowing());
     }
 
 }

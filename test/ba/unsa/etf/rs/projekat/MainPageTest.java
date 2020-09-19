@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -16,6 +17,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import org.testfx.framework.junit5.Start;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
@@ -55,16 +57,19 @@ public class MainPageTest {
     public void loginAdmin(FxRobot robot){
         robot.clickOn("#adminName");
         robot.write("1");
-        robot.clickOn("#adminPassword");
+        //robot.clickOn("#adminPassword");
+        robot.press(KeyCode.TAB).release(KeyCode.TAB).press(KeyCode.ENTER);
         robot.write("1");
-        robot.clickOn("#loginAdmin");
+        //robot.clickOn("#loginAdmin");
+        robot.press(KeyCode.TAB).release(KeyCode.TAB).press(KeyCode.ENTER);
 
-
-        assertFalse(theStage.isShowing());
+        robot.lookup("#backToMainPage").tryQuery().isPresent();
+        assertTrue(theStage.isShowing());
 
         Platform.runLater( () -> {
             theStage.close();
         });
+
     }
     @Test
     public void loginVoter(FxRobot robot){
@@ -86,7 +91,9 @@ public class MainPageTest {
     public void loginAdmin1(FxRobot robot){
         robot.clickOn("#adminName");
         robot.write("Admin");
-        robot.clickOn("#adminPassword");
+
+        //robot.clickOn("#adminPassword");
+        robot.press(KeyCode.TAB).release(KeyCode.TAB).press(KeyCode.ENTER);
         robot.write("password");
         robot.clickOn("#loginAdmin");
 
@@ -101,16 +108,19 @@ public class MainPageTest {
     public void loginAdminBack(FxRobot robot){
         robot.clickOn("#adminName");
         robot.write("1");
-        robot.clickOn("#adminPassword");
+        //robot.clickOn("#adminPassword");
+        robot.press(KeyCode.TAB).release(KeyCode.TAB).press(KeyCode.ENTER);
         robot.write("1");
+        //robot.clickOn("#loginAdmin");
+        robot.press(KeyCode.TAB).release(KeyCode.TAB).press(KeyCode.ENTER);
         robot.clickOn("#loginAdmin");
-        Platform.runLater( () -> {
-            theStage.close();
-        });
+
         robot.clickOn("#backToMainPage");
         assertFalse(theStage.isShowing());
 
-
+        Platform.runLater( () -> {
+            theStage.close();
+        });
     }
 
     @Test
@@ -118,6 +128,33 @@ public class MainPageTest {
         robot.press(KeyCode.ALT).press(KeyCode.H).press(KeyCode.C);
         ImageView imgAbout = robot.lookup("#imgAbout").queryAs(ImageView.class);
         assertNotNull(imgAbout);
+
+        Platform.runLater( () -> {
+            Stage stage = (Stage) imgAbout.getScene().getWindow();
+            theStage.close();
+        });
+    }
+
+    @Test
+    public void helpClose(FxRobot robot){
+        robot.press(KeyCode.ALT).press(KeyCode.H).press(KeyCode.C);
+        //robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+        robot.clickOn("#outButton");
+        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+        robot.sleep(1000);
+
+        robot.press(KeyCode.ALT);
+        robot.press(KeyCode.F4);
+        Button button = new Button();
+        try {
+             button = robot.lookup("#outButton").queryAs(Button.class);
+        }
+        catch (Exception e){
+            assertNotEquals(null,button);
+        }
+
+
+
     }
 
 }

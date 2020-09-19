@@ -60,7 +60,7 @@
                   <Insets left="189.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#finishVoting" text="Završi glasanje" translateX="90.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="finishVotingBtn" mnemonicParsing="false" onAction="#finishVoting" text="Završi glasanje" translateX="90.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>
