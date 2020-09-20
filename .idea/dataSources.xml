@@ -7,5 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\DELL\IdeaProjects\rs-projekat\el_baza.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="baza" uuid="5a936dc4-2c16-41f8-b2b6-5d5366b74fbb">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Mustafa\IdeaProjects\rs-projekat\baza.db</jdbc-url>
+    </data-source>
   </component>
 </project>

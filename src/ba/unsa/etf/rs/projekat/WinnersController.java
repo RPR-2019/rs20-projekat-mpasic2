@@ -3,7 +3,12 @@ package ba.unsa.etf.rs.projekat;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -75,7 +80,23 @@ public class WinnersController implements Initializable {
         }
     }
 
+    public void actionWriteXML(javafx.event.ActionEvent actionEvent) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Zapiši XML datoteku");
+            Stage stage = (Stage)winnerPresident.getScene().getWindow();
+            File file = fileChooser.showSaveDialog(stage);
+            if (file == null)
+                return;
 
+            XMLFormat xml = new XMLFormat();
+            xml.zapisi(file);
 
-
+        } catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wrong file format");
+            alert.setContentText("An error occured during file save.");
+            alert.showAndWait();
+        }
+    }
 }

@@ -345,5 +345,43 @@ public class VotingDAO {
         }
     }
 
+    public Candidats getWinnerPresident(){
+        Candidats votedPresident = getPresidents().get(0);
+
+        int maxPred=0;
+        for(int i=0;i<getPresidents().size();i++){
+            if(getPresidents().get(i).getVoteNumber() > getPresidents().get(maxPred).getVoteNumber())
+                maxPred=i;
+
+        }
+        votedPresident.setId(maxPred);
+        return votedPresident;
+    }
+
+    public Candidats getWinnerUnderPresident(){
+        Candidats votedUnderPresident = getUnderPresidents().get(0);
+
+        int maxPred=0;
+        for(int i=0;i<getUnderPresidents().size();i++){
+            if(getUnderPresidents().get(i).getVoteNumber() > getUnderPresidents().get(maxPred).getVoteNumber())
+                maxPred=i;
+
+        }
+        votedUnderPresident.setId(maxPred);
+        return votedUnderPresident;
+    }
+
+    public Candidats getWinnerDeputy(){
+        Candidats votedPresident = getPresidents().get(0);
+
+        int maxPred=0;
+        for(int i=0;i<getPresidents().size();i++){
+            if(getPresidents().get(i).getVoteNumber() > getPresidents().get(maxPred).getVoteNumber())
+                maxPred=i;
+
+        }
+        votedPresident.setId(maxPred);
+        return votedPresident;
+    }
 
 }
