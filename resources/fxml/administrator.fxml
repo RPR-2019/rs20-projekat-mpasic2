@@ -61,6 +61,11 @@
                </GridPane.margin>
             </Button>
             <Button fx:id="finishVotingBtn" mnemonicParsing="false" onAction="#finishVoting" text="Završi glasanje" translateX="90.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#writeDatAction" text="Zapiši" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="37.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
    </center>

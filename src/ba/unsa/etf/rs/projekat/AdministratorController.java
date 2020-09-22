@@ -12,8 +12,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -115,7 +117,7 @@ public class AdministratorController implements Initializable {
                     conterDeputy = conterDeputy + 1;
             }
 
-            if (counderPresident > 1) {
+            if (counderPresident > 1 || counterUnderPresident > 1 || conterDeputy > 1) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Info");
                 alert.setHeaderText("Postoje kandidati koji imaju jednak broj glasova!");
@@ -123,20 +125,6 @@ public class AdministratorController implements Initializable {
 
                 alert.showAndWait();
 
-            } else if (counterUnderPresident > 1) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Info");
-                alert.setHeaderText("Postoje kandidati koji imaju jednak broj glasova!");
-                alert.setContentText("Molimo kontaktirajte administraotora");
-
-                alert.showAndWait();
-            } else if (conterDeputy > 1) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Info");
-                alert.setHeaderText("Postoje kandidati koji imaju jednak broj glasova!");
-                alert.setContentText("Molimo kontaktirajte administraotora");
-
-                alert.showAndWait();
             } else {
                 Stage noviProzor = new Stage();
                 Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/winners.fxml"));
@@ -147,8 +135,9 @@ public class AdministratorController implements Initializable {
 
                 Stage zatvaranjePoruka = (Stage) mainGridAdmin.getScene().getWindow();
                 zatvaranjePoruka.close();
-
                 baza.deleteEverything();
+
+
             }
 
         }
@@ -205,5 +194,27 @@ public class AdministratorController implements Initializable {
         noviProzor.setScene(scene);
         noviProzor.show();
 
+    }
+
+    public void writeDatAction(ActionEvent actionEvent) {
+
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Zapiši XML datoteku");
+            Stage stage = (Stage)mainGridAdmin.getScene().getWindow();
+            File file = fileChooser.showSaveDialog(stage);
+            if (file == null)
+                return;
+
+            XMLFormat xml = new XMLFormat();
+            xml.zapisi(file);
+
+
+        } catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wrong file format");
+            alert.setContentText("An error occured during file save.");
+            alert.showAndWait();
+        }
     }
 }

@@ -81,22 +81,6 @@ public class WinnersController implements Initializable {
     }
 
     public void actionWriteXML(javafx.event.ActionEvent actionEvent) {
-        try {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Zapiši XML datoteku");
-            Stage stage = (Stage)winnerPresident.getScene().getWindow();
-            File file = fileChooser.showSaveDialog(stage);
-            if (file == null)
-                return;
 
-            XMLFormat xml = new XMLFormat();
-            xml.zapisi(file);
-
-        } catch(Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Wrong file format");
-            alert.setContentText("An error occured during file save.");
-            alert.showAndWait();
-        }
     }
 }

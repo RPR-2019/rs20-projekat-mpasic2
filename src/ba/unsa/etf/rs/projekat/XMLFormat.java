@@ -14,7 +14,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.function.Function;
 
@@ -23,54 +25,73 @@ public class XMLFormat {
     private ArrayList<Function> functions = new ArrayList<>();
     private VotingDAO baza = new VotingDAO();
 
+
     public void zapisi(File file)  {
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        Document document = null;
+        String help="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>";
 
+        if(baza.getCandidats().size()==0)
+            help+="<kandidati/>";
+        else {
+            help += "<kandidati>\n";
+
+                help += "<predsjednici>\n";
+
+                for (int i = 0; i < baza.getPresidents().size(); i++) {
+                    if (baza.getPresidents().get(i) == baza.getWinnerPresident()) {
+                        help += "<pobjednik> <ime i prezime> \n" + baza.getPresidents().get(i).getName() + " " + baza.getPresidents().get(i).getLastname() + "\n</ime i prezime> </pobjednik>\n";
+                    } else
+                        help += " <ime i prezime> \n" + baza.getPresidents().get(i).getName() + " " + baza.getPresidents().get(i).getLastname() + "\n</ime i prezime>\n";
+
+                }
+
+
+
+                help += "<potpredsjednici>\n";
+
+                for (int i = 0; i < baza.getUnderPresidents().size(); i++) {
+                    if (baza.getUnderPresidents().get(i) == baza.getWinnerUnderPresident()) {
+                        help += "<pobjednik> <ime i prezime> \n" + baza.getUnderPresidents().get(i).getName() + " " + baza.getUnderPresidents().get(i).getLastname() + "\n</ime i prezime> </pobjednik>\n";
+                    } else
+                        help += " <ime i prezime> \n" + baza.getUnderPresidents().get(i).getName() + " " + baza.getUnderPresidents().get(i).getLastname() + "\n</ime i prezime>\n";
+
+                }
+
+
+
+                help += "<zamjenici>\n";
+
+                for (int i = 0; i < baza.getDeputy().size(); i++) {
+                    if (baza.getDeputy().get(i) == baza.getWinnerDeputy()) {
+                        help += "<pobjednik> <ime i prezime> \n" + baza.getDeputy().get(i).getName() + " " + baza.getDeputy().get(i).getLastname() + "\n</ime i prezime> </pobjednik>\n";
+                    } else
+                        help += " <ime i prezime> \n" + baza.getDeputy().get(i).getName() + " " + baza.getDeputy().get(i).getLastname() + "\n</ime i prezime>\n";
+
+                }
+
+            help += "</kandidati>\n";
+        }
+
+        if(baza.getUsers().size()==0)
+            help+="<glasaci/>";
+        else{
+            help+="<glasac>\n";
+            for(int i=0;i<baza.getUsers().size();i++){
+                help+="<galsac> <broj licne i jmbg>\n" + baza.getUsers().get(i).getCardNumber() + " " + baza.getUsers().get(i).getJmbg() + "\n</galsac> </broj licne i jmbg>\n";
+            }
+            help+="</glasac>";
+        }
+
+
+
+        PrintWriter out = null;
         try {
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            document = documentBuilder.newDocument();
-        } catch (ParserConfigurationException err) {
-            err.printStackTrace();
+            out = new PrintWriter(file.getName());
+            out.print(help);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
-        Element root = document.createElement("Glasanje");
-        document.appendChild(root);
-
-        for (Candidats cand : candidats) {
-            Element eCand = document.createElement("Kandidat");
-            if (cand==baza.getWinnerPresident()) {
-                Attr winnerPresident = document.createAttribute("Izabrani predsjednik");
-                eCand.setAttributeNode(winnerPresident);
-            }
-            if (cand==baza.getWinnerUnderPresident()) {
-                Attr winnerUnderPresident = document.createAttribute("Izabrani potpredsjednik");
-                eCand.setAttributeNode(winnerUnderPresident);
-            }
-            if (cand==baza.getWinnerDeputy()) {
-                Attr winnerDeputy = document.createAttribute("Izabrani zamjenik");
-                eCand.setAttributeNode(winnerDeputy);
-            }
-
-            Element nameCandidat = document.createElement("Ime i prezime");
-            nameCandidat.appendChild(document.createTextNode(cand.getName()+" "+cand.getLastname()));
-            eCand.appendChild(nameCandidat);
-
-
-
-            root.appendChild(eCand);
-        }
-
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(document);
-
-            StreamResult streamResult = new StreamResult(file);
-            transformer.transform(source, streamResult);
-        } catch(TransformerException err) {
-            err.printStackTrace();
-        }
     }
 
 
