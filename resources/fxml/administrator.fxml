@@ -83,6 +83,7 @@
                   <MenuItem mnemonicParsing="true" onAction="#newAdminAction" text="_Add Admin" />
                   <MenuItem mnemonicParsing="true" onAction="#addCandidatAction" text="_Add Candidat" />
                   <MenuItem mnemonicParsing="true" onAction="#addPartyAction" text="_Add party" />
+                <MenuItem mnemonicParsing="true" onAction="#deleteCandAction" text="_Delete Candidat" />
             </items>
           </Menu>
           <Menu mnemonicParsing="true" text="_Help">

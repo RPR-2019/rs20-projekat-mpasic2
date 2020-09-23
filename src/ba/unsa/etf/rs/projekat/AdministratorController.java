@@ -217,4 +217,16 @@ public class AdministratorController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public void deleteCandAction(ActionEvent actionEvent) throws IOException {
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/deleteCandidats.fxml"));
+        noviProzor.setTitle("Brisanje kandidata");
+        Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
+
+        Stage zatvaranjePoruka = (Stage) mainGridAdmin.getScene().getWindow();
+        zatvaranjePoruka.close();
+    }
 }

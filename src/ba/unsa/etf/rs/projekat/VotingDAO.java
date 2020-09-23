@@ -12,7 +12,7 @@ public class VotingDAO {
     private Connection connection;
     private static PreparedStatement findAdminQuery,addNewUserQuery,findUserQuery,newQuery,getAllCandidats,getAllPartys,getAllFunctions,QueryAllVotersNumber,newPasswordQuery,addVote,
             addNewAdmin,adminNewQuery,addNewCandidas, newQueryCandidats,howMuchVotesQuery,deleteVoterQuery,addNewPartyQuery,newPartyQuery,
-            newQueryVotersDelete, deleteAllVoters, deleteAllCandidats, deleteAdminQuery;
+            newQueryVotersDelete, deleteAllVoters, deleteAllCandidats, deleteAdminQuery, deleteCandidat;
 
     public VotingDAO() {
 
@@ -41,6 +41,7 @@ public class VotingDAO {
                 deleteAllVoters = connection.prepareStatement("DELETE FROM voters;");
                 deleteAllCandidats = connection.prepareStatement("DELETE FROM candidats;");
                 deleteAdminQuery = connection.prepareStatement("DELETE FROM admin WHERE id=?");
+                deleteCandidat = connection.prepareStatement("DELETE FROM candidats WHERE id=?");
             }
 
 
@@ -382,6 +383,19 @@ public class VotingDAO {
         }
         votedPresident.setId(maxPred);
         return votedPresident;
+    }
+
+    public void deleteCandidat(Candidats cand){
+        try {
+            deleteCandidat.setInt(1,cand.getId());
+
+
+            deleteCandidat.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
