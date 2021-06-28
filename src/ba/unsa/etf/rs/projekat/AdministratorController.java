@@ -37,6 +37,8 @@ public class AdministratorController implements Initializable {
     public TableColumn<Candidats,String> colJMBG;
     public VotingDAO baza = new VotingDAO();
 
+
+
     public AdministratorController() {
     }
 
@@ -156,6 +158,10 @@ public class AdministratorController implements Initializable {
     }
 
     public void newPasswordAction(ActionEvent actionEvent) throws IOException {
+        Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
+        zatvaranjePoruka.close();
+
+
         Stage noviProzor = new Stage();
         Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/newPassword.fxml"));
         noviProzor.setTitle("Promjena lozinke");
@@ -165,6 +171,9 @@ public class AdministratorController implements Initializable {
     }
 
     public void newAdminAction(ActionEvent actionEvent) throws IOException {
+        Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
+        zatvaranjePoruka.close();
+
         Stage noviProzor = new Stage();
         Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/newAdmin.fxml"));
         noviProzor.setTitle("Dodavanje administratora");
@@ -175,6 +184,9 @@ public class AdministratorController implements Initializable {
     }
 
     public void addCandidatAction(ActionEvent actionEvent) throws IOException {
+        Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
+        zatvaranjePoruka.close();
+
         Stage noviProzor = new Stage();
         Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/newCandidat.fxml"));
         noviProzor.setTitle("Dodavanje kandidata");
@@ -182,17 +194,21 @@ public class AdministratorController implements Initializable {
         noviProzor.setScene(scene);
         noviProzor.show();
 
-        Stage zatvaranjePoruka = (Stage) mainGridAdmin.getScene().getWindow();
-        zatvaranjePoruka.close();
+
     }
 
     public void addPartyAction(ActionEvent actionEvent) throws IOException, SQLException {
+        Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
+        zatvaranjePoruka.close();
+
+
         Stage noviProzor = new Stage();
         Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/newParty.fxml"));
         noviProzor.setTitle("Dodavanje stranke");
         Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         noviProzor.setScene(scene);
         noviProzor.show();
+
 
     }
 
@@ -219,6 +235,10 @@ public class AdministratorController implements Initializable {
     }
 
     public void deleteCandAction(ActionEvent actionEvent) throws IOException {
+        Stage zatvaranjePoruka=(Stage)mainGridAdmin.getScene().getWindow();
+        zatvaranjePoruka.close();
+
+
         Stage noviProzor = new Stage();
         Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/deleteCandidats.fxml"));
         noviProzor.setTitle("Brisanje kandidata");
@@ -226,7 +246,7 @@ public class AdministratorController implements Initializable {
         noviProzor.setScene(scene);
         noviProzor.show();
 
-        Stage zatvaranjePoruka = (Stage) mainGridAdmin.getScene().getWindow();
-        zatvaranjePoruka.close();
+
     }
+
 }

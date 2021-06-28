@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
+
 public class DeleteCandidatsController implements Initializable {
     public Button votePageBack;
     public Button deleteBtn;
@@ -39,16 +40,16 @@ public class DeleteCandidatsController implements Initializable {
     }
 
     public void votePageBackAction(ActionEvent actionEvent) throws SQLException, IOException {
-        baza.closeBase();
-        Stage noviProzor = new Stage();
-        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
-        noviProzor.setTitle("E-glasanje");
-        Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-        noviProzor.setScene(scene);
-        noviProzor.show();
 
         Stage zatvaranjePoruka = (Stage) votePageBack.getScene().getWindow();
         zatvaranjePoruka.close();
+
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
+        noviProzor.setTitle("Dobrodošli");
+        Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
 
     }
 

@@ -34,8 +34,8 @@
             </font></Label>
         <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <buttons>
-                <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" text="Obriši" translateX="-40.0" />
                 <Button fx:id="votePageBack" mnemonicParsing="false" onAction="#votePageBackAction" text="Povratak" translateX="-40.0" />
+                <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" text="Obriši" translateX="-40.0" />
             </buttons>
         </ButtonBar>
 

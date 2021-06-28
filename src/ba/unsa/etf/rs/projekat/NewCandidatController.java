@@ -35,11 +35,13 @@ public class NewCandidatController {
 
 
 
+
     @FXML
     public void initialize() {
         candidateParty.setItems(stranke);
         candidateFunction.setItems(funkcije);
     }
+
 
     public void sacuvajAction(ActionEvent actionEvent) throws SQLException, IOException {
         int numbefOfCandidats = baza.getCandidats().size();
@@ -48,7 +50,7 @@ public class NewCandidatController {
                 candidateLivingPlace.getText().isEmpty() || candidateFunction.getValue()==null) {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error dialog");
+            alert.setTitle("Greška");
             alert.setHeaderText("Neuspješno dodavanje kandidata");
             alert.setContentText("Niste popunili sva potrebna polja!");
             alert.showAndWait();
@@ -67,7 +69,7 @@ public class NewCandidatController {
 
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information dialog");
+            alert.setTitle("Obavijest");
             alert.setHeaderText("Dodavanje kandidata");
             alert.setContentText("Uspjesno ste dodali kandidata!");
 
@@ -80,11 +82,32 @@ public class NewCandidatController {
 
             Stage noviProzor = new Stage();
             Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
-            noviProzor.setTitle("Dobrodosli");
+            MainPageController mpc = new MainPageController();
+            noviProzor.setTitle("Dobrodosli " + mpc.userNameGlobal);
             Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             noviProzor.setScene(scene);
             noviProzor.show();
 
         }
+    }
+
+    public void addNewParty(ActionEvent actionEvent) throws IOException {
+
+        Stage noviProzor = new Stage();
+        Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/newParty.fxml"));
+        noviProzor.setTitle("Dodavanje stranke");
+        Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        noviProzor.setScene(scene);
+        noviProzor.show();
+        noviProzor.setOnHiding(windowEvent -> {
+
+        });
+
+
+    }
+
+    public void backToMain(ActionEvent actionEvent) throws SQLException, IOException {
+        Stage zatvaranjePoruka = (Stage) candidateName.getScene().getWindow();
+        zatvaranjePoruka.close();
     }
 }

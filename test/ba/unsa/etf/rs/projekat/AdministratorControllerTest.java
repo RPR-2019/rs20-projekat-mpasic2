@@ -1,5 +1,6 @@
 package ba.unsa.etf.rs.projekat;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -37,14 +38,17 @@ public class AdministratorControllerTest {
     }
     @Test
     public void help(FxRobot robot){
-        robot.press(KeyCode.ALT).press(KeyCode.H).press(KeyCode.C);
+        robot.press(KeyCode.ALT).press(KeyCode.H).press(KeyCode.K);
         ImageView imgAbout = robot.lookup("#imgAbout").queryAs(ImageView.class);
         assertNotNull(imgAbout);
+        Platform.runLater( () -> {
+            theStage.close();
+        });
     }
 
     @Test
     public void newAdminTest(FxRobot robot) {
-        robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.A).press(KeyCode.ENTER);
+        robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.D).press(KeyCode.ENTER);
         robot.lookup("#newAAdminEmail").tryQuery().isPresent();
         robot.clickOn("#newAAdminEmail");
         robot.write("NoviAdmin");
@@ -54,11 +58,14 @@ public class AdministratorControllerTest {
 
         assertFalse(theStage.isShowing());
         //baza.deleteAdmin();
+        Platform.runLater( () -> {
+            theStage.close();
+        });
 
     }
     @Test
     public void changePassword(FxRobot robot){
-        robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.C);
+        robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.P);
         robot.clickOn("#emailAdmin");
         robot.write("1");
         robot.clickOn("#odlPassword");
@@ -70,44 +77,57 @@ public class AdministratorControllerTest {
         robot.clickOn("#changePassword");
 
         assertFalse(theStage.isShowing());
+        Platform.runLater( () -> {
+            theStage.close();
+        });
     }
 
     @Test
     public void newPartyTest(FxRobot robot){
-        robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.A).release(KeyCode.A).press(KeyCode.A).release(KeyCode.A).press(KeyCode.A).release(KeyCode.A).press(KeyCode.ENTER);
+        robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.D).release(KeyCode.D).press(KeyCode.D).release(KeyCode.D).press(KeyCode.D).release(KeyCode.D).press(KeyCode.ENTER);
         robot.clickOn("#txtfldPartyName");
         robot.write("Noova stranka");
         robot.clickOn("#addPartyBtn");
 
         assertFalse(theStage.isShowing());
+        Platform.runLater( () -> {
+            theStage.close();
+        });
     }
 
     @Test
     public void newCandidatTest(FxRobot robot){
-        robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.A).release(KeyCode.A).press(KeyCode.A).release(KeyCode.A).press(KeyCode.ENTER);
+        robot.press(KeyCode.ALT).press(KeyCode.E).press(KeyCode.D).release(KeyCode.D).press(KeyCode.D).release(KeyCode.D).press(KeyCode.ENTER).release(KeyCode.ALT).release(KeyCode.E).release(KeyCode.ENTER);
         robot.clickOn("#candidateName");
         robot.write("Novica");
         robot.clickOn("#candidateLastname");
         robot.write("Novic");
         robot.clickOn("#candidateDate");
-        robot.write("1/1/1998");
+        robot.write("19. 5. 2000.");
         robot.clickOn("#candidateLivingPlace");
         robot.write("Novic");
         robot.clickOn("#candidateParty");
         robot.clickOn("#candidateFunction");
 
-        robot.clickOn("#candidateFunction").press(KeyCode.DOWN).press(KeyCode.ENTER).press(KeyCode.ENTER);
+        robot.clickOn("#candidateFunction").press(KeyCode.DOWN).press(KeyCode.ENTER);
+
         robot.clickOn("#addCandidatBtn");
 
         assertFalse(theStage.isShowing());
+        Platform.runLater( () -> {
+            theStage.close();
+        });
     }
 
     @Test
     public void goBackTest(FxRobot robot){
-        robot.press(KeyCode.ALT).press(KeyCode.F).press(KeyCode.B);
+        robot.press(KeyCode.ALT).press(KeyCode.F).press(KeyCode.N);
 
         Button button = robot.lookup("#loginAdmin").queryAs(Button.class);
         assertNotEquals(null,button);
+        Platform.runLater( () -> {
+            theStage.close();
+        });
     }
 
     @Test
@@ -115,6 +135,9 @@ public class AdministratorControllerTest {
         robot.clickOn("#finishVotingBtn");
         robot.press(KeyCode.ENTER);
         assertFalse(theStage.isShowing());
+        Platform.runLater( () -> {
+            theStage.close();
+        });
     }
 
 }

@@ -22,6 +22,7 @@ public class Main extends Application {
         primaryStage.setTitle("E-glasanje");
         primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         primaryStage.show();
+        primaryStage.setResizable(false);
         currentlyLoggedInUser = null;
         VoteServer server = new VoteServer(2345);
 

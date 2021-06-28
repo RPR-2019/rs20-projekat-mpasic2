@@ -107,10 +107,10 @@ public class MainPageTest {
     @Test
     public void loginAdminBack(FxRobot robot){
         robot.clickOn("#adminName");
-        robot.write("1");
+        robot.write("admin");
         //robot.clickOn("#adminPassword");
         robot.press(KeyCode.TAB).release(KeyCode.TAB).press(KeyCode.ENTER);
-        robot.write("1");
+        robot.write("admin");
         //robot.clickOn("#loginAdmin");
         robot.press(KeyCode.TAB).release(KeyCode.TAB).press(KeyCode.ENTER);
         robot.clickOn("#loginAdmin");

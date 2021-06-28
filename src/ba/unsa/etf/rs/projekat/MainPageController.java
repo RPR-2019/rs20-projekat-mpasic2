@@ -10,11 +10,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import javafx.stage.StageStyle;
+import org.mindrot.jbcrypt.BCrypt;
 
+
+import javax.swing.text.Document;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
@@ -33,10 +44,32 @@ public class MainPageController {
     private Voters glasac = new Voters(1,"","");
     public enum Validate{OK, NOTOK};
     Validate validation;
+    public static String userNameGlobal="";
 
-    /*public MainPageController(VotingDAO baza) {
-        this.baza=baza;
-    }*/
+    public static String fromCharCode(int... codePoints) {
+        StringBuilder builder = new StringBuilder(codePoints.length);
+        for (int codePoint : codePoints) {
+            builder.append(Character.toChars(codePoint));
+        }
+        return builder.toString();
+    }
+
+    public static String hashPassword(String password){
+        String hashPass = "";
+
+        for(int i=0;i<password.length();i++){
+            int br = password.charAt(i);
+            int rest = br%16;
+            int temp = rest+55;
+            hashPass+=fromCharCode(temp);
+
+
+        }
+
+        return hashPass;
+    }
+
+
 
     public void helpAction(ActionEvent actionEvent) throws IOException {
         Stage noviProzor = new Stage();
@@ -45,6 +78,7 @@ public class MainPageController {
         Scene scene = new  Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         noviProzor.setScene(scene);
         noviProzor.show();
+
     }
 
     public void loginAdminButton(ActionEvent actionEvent) throws IOException, SQLException {
@@ -57,11 +91,14 @@ public class MainPageController {
         }
 
         boolean isThereAdminPassword=false;
+
         for(int i=0;i<baza.getAdmin().size();i++) {
-            if (adminPassword.getText().equals(baza.getAdmin().get(i).getPassword())) {
-                isThereAdminPassword=true;
-            }
+            if(hashPassword(adminPassword.getText()).equals(baza.getAdmin().get(i).getPassword()))
+                    isThereAdminPassword=true;
+
         }
+
+
 
         if(isThereAdminName && isThereAdminPassword) {
             String pom ="";
@@ -72,7 +109,8 @@ public class MainPageController {
 
             Stage noviProzor = new Stage();
             Parent roditelj = FXMLLoader.load(getClass().getResource("/fxml/administrator.fxml"));
-            noviProzor.setTitle("Dobrodosao " + pom);
+            userNameGlobal= pom;
+            noviProzor.setTitle("Dobrodošao " + pom);
             Scene scene = new Scene(roditelj, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             noviProzor.setScene(scene);
             noviProzor.show();
@@ -86,7 +124,7 @@ public class MainPageController {
             adminPassword.getStyleClass().add("poljeNijeIspravno");
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
+            alert.setTitle("Greška");
             alert.setHeaderText("Greška prilikom registracije");
             alert.setContentText("Neispravna lozinka!");
             alert.showAndWait();
@@ -99,7 +137,7 @@ public class MainPageController {
             adminName.getStyleClass().add("poljeNijeIspravno");
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
+            alert.setTitle("Greška");
             alert.setHeaderText("Greška prilikom registracije");
             alert.setContentText("Neispravni podaci!");
             alert.showAndWait();
@@ -107,37 +145,22 @@ public class MainPageController {
     }
 
 
-    public static boolean isJMBGOk(String jmbg) {
-        String s = "";
-        String input = jmbg.substring(0, jmbg.length() - 1);
-        int i = 0, i1 = 0, diff = 0;
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(0))).intValue() * 7);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(1))).intValue() * 6);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(2))).intValue() * 5);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(3))).intValue() * 4);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(4))).intValue() * 3);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(5))).intValue() * 2);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(6))).intValue() * 7);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(7))).intValue() * 6);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(8))).intValue() * 5);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(9))).intValue() * 4);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(10))).intValue() * 3);
-        i = i + (Integer.valueOf(String.valueOf(jmbg.charAt(11))).intValue() * 2);
-        i1 = i;
-        i = i / 11;
-        diff = i1 - (i * 11);
-        if ((diff == 0) || (diff == 1)) {
-            s = input + 0;
-        } else {
-            s = input + (11 - diff);
-        }
-        return s.equals(jmbg);
+    public static boolean isJMBGOkSERVER(String jmbg) throws IOException {
+        String adresa = "http://localhost:9090/jmbgcheck?jmbg="+jmbg;
+        URL url = new URL(adresa);
+        Scanner sc = new Scanner(url.openStream());
+        StringBuffer sb = new StringBuffer();
+        while(sc.hasNext())
+                sb.append(sc.next());
+        String res = sb.toString();
+        return res.contains("DOBAR");
+
     }
 
     public void loginUserButton(ActionEvent actionEvent) throws IOException, SQLException {
         validation = Validate.OK;
 
-        if(userJMBG.getText().isEmpty() || !isJMBGOk(userJMBG.getText())){
+        if(userJMBG.getText().isEmpty() || !isJMBGOkSERVER(userJMBG.getText())){
             userJMBG.getStyleClass().removeAll("poljeIspravno");
             userJMBG.getStyleClass().add("poljeNijeIspravno");
             validation = Validate.NOTOK;
@@ -180,8 +203,8 @@ public class MainPageController {
 
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
-                alert.setHeaderText("Greska prilikom registracije");
+                alert.setTitle("Greška");
+                alert.setHeaderText("Greška prilikom registracije");
                 alert.setContentText("Ovaj korisnik je vec galasao!");
                 alert.showAndWait();
             }
@@ -191,8 +214,8 @@ public class MainPageController {
 
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Greska prilikom registracije");
+            alert.setTitle("Greška");
+            alert.setHeaderText("Greška prilikom registracije");
             alert.setContentText("Neispravni podaci!");
 
             alert.showAndWait();
@@ -203,5 +226,7 @@ public class MainPageController {
         Stage zatvaranjePoruka=(Stage)adminName.getScene().getWindow();
         zatvaranjePoruka.close();
     }
+
+
 
 }

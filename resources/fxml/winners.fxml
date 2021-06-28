@@ -61,7 +61,7 @@
            <Font name="System Bold" size="12.0" />
        </font></Label>
       <Separator prefWidth="235.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-      <Button fx:id="writeBtn" mnemonicParsing="false" onAction="#actionWriteXML" text="Zapisi" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Button fx:id="writeBtn" mnemonicParsing="false" onAction="#actionWriteXML" text="Zapiši" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="101.0" />
          </GridPane.margin>

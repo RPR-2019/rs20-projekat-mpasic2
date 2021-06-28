@@ -89,7 +89,7 @@ public class VotePageController implements Initializable {
         boolean everythingOK = true;
         if (txtfldPresident.getText() == "" || txtfldUnderPresident.getText() == "" || txtfldDeputy.getText() == "") {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
+            alert.setTitle("Greška");
             alert.setHeaderText("Greška prilikom glasanja");
             alert.setContentText("Neispravno glasanje!");
             alert.showAndWait();
@@ -124,7 +124,7 @@ public class VotePageController implements Initializable {
 
             if (txtfldPresident.getText().isEmpty() || txtfldUnderPresident.getText().isEmpty() || txtfldDeputy.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
+                alert.setTitle("Greška");
                 alert.setHeaderText("Greška prilikom glasanja");
                 alert.setContentText("Niste popunili sva polja!");
 
@@ -157,7 +157,7 @@ public class VotePageController implements Initializable {
 
             if (!presidentOK) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
+                alert.setTitle("Greška");
                 alert.setHeaderText("Greška prilikom glasanja");
                 alert.setContentText("Neispravno glasanje!");
                 alert.showAndWait();
@@ -167,7 +167,7 @@ public class VotePageController implements Initializable {
             }
             if (!underPresidentOK) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
+                alert.setTitle("Greška");
                 alert.setHeaderText("Greška prilikom glasanja");
                 alert.setContentText("Neispravno glasanje!");
                 alert.showAndWait();
@@ -177,7 +177,7 @@ public class VotePageController implements Initializable {
             }
             if (!deputyOK) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
+                alert.setTitle("Greška");
                 alert.setHeaderText("Greška prilikom glasanja");
                 alert.setContentText("Neispravno glasanje!");
                 alert.showAndWait();
@@ -195,7 +195,7 @@ public class VotePageController implements Initializable {
                 baza.closeBase();
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Information dialog");
+                alert.setTitle("Obavijest");
                 alert.setHeaderText("Uspješno ste glasali");
                 alert.setContentText("Hvala Vam!");
                 alert.showAndWait();

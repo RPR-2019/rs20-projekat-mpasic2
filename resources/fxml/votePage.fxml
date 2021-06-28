@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:id="voteGrid" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.VotePageController">
+<GridPane fx:id="voteGrid" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rs.projekat.VotePageController">
     <stylesheets>
         <URL value="@/css/edit.css" />
     </stylesheets>
@@ -30,7 +30,7 @@
         <columns>
           <TableColumn fx:id="colPresidentNumber" prefWidth="70.0" text="Redni broj" />
           <TableColumn fx:id="colPresidentName" prefWidth="102.0" text="Kandidat" />
-            <TableColumn fx:id="colPresidentParty" prefWidth="78.0" text="Stranka" />
+            <TableColumn fx:id="colPresidentParty" prefWidth="78.39999389648438" text="Stranka" />
         </columns>
       </TableView>
       <TableView fx:id="tblUnderPresident" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -85,8 +85,8 @@
            </font></Label>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
         <buttons>
-          <Button mnemonicParsing="false" onAction="#onActionSave" text="Glasaj" translateX="-40.0" />
             <Button fx:id="votePageBack" mnemonicParsing="false" onAction="#votePageBackAction" text="Povratak" translateX="-40.0" />
+          <Button mnemonicParsing="false" onAction="#onActionSave" text="Glasaj" translateX="-40.0" />
         </buttons>
       </ButtonBar>
 

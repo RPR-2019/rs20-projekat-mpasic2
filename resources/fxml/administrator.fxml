@@ -22,7 +22,9 @@
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <TableView fx:id="tblCandidats" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -38,6 +40,9 @@
                 <TableColumn fx:id="colUserNumber" prefWidth="105.0" text="Broj lične karte" />
                 <TableColumn fx:id="colJMBG" prefWidth="145.0" text="JMBG" />
               </columns>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
             </TableView>
             <Label text="KANDIDATI" textFill="WHITE" GridPane.columnIndex="1">
                <GridPane.margin>
@@ -55,18 +60,20 @@
                     <Font name="System Bold" size="12.0" />
                 </font>
             </Label>
-            <Button fx:id="backToMainPage" mnemonicParsing="false" onAction="#backButtonAction" text="Povratak" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <ButtonBar GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3">
+              <buttons>
+                  <Button fx:id="backToMainPage" mnemonicParsing="false" onAction="#backButtonAction" text="Povratak" />
+                  <Button mnemonicParsing="false" onAction="#writeDatAction" text="Zapiši" />
+                  <Button fx:id="finishVotingBtn" mnemonicParsing="false" onAction="#finishVoting" text="Završi glasanje" />
+              </buttons>
                <GridPane.margin>
-                  <Insets left="189.0" />
+                  <Insets right="126.0" />
                </GridPane.margin>
-            </Button>
-            <Button fx:id="finishVotingBtn" mnemonicParsing="false" onAction="#finishVoting" text="Završi glasanje" translateX="90.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#writeDatAction" text="Zapiši" GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="37.0" />
-               </GridPane.margin>
-            </Button>
+            </ButtonBar>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </GridPane>
    </center>
    <top>
@@ -74,21 +81,22 @@
         <menus>
           <Menu mnemonicParsing="true" text="_File">
             <items>
-              <MenuItem mnemonicParsing="true" onAction="#backButtonAction" text="_Back" />
+              <MenuItem mnemonicParsing="true" onAction="#backButtonAction" text="_Nazad" />
             </items>
           </Menu>
           <Menu mnemonicParsing="true" text="_Edit">
             <items>
-              <MenuItem mnemonicParsing="true" onAction="#newPasswordAction" text="_Change Password" />
-                  <MenuItem mnemonicParsing="true" onAction="#newAdminAction" text="_Add Admin" />
-                  <MenuItem mnemonicParsing="true" onAction="#addCandidatAction" text="_Add Candidat" />
-                  <MenuItem mnemonicParsing="true" onAction="#addPartyAction" text="_Add party" />
-                <MenuItem mnemonicParsing="true" onAction="#deleteCandAction" text="_Delete Candidat" />
+              <MenuItem mnemonicParsing="true" onAction="#newPasswordAction" text="_Promijeni sifru" />
+                  <MenuItem mnemonicParsing="true" onAction="#newAdminAction" text="_Dodaj admina" />
+                  <MenuItem mnemonicParsing="true" onAction="#addCandidatAction" text="_Dodaj kandidata" />
+                  <MenuItem mnemonicParsing="true" onAction="#addPartyAction" text="_Dodaj stranku" />
+                <MenuItem mnemonicParsing="true" onAction="#deleteCandAction" text="_Obrisi kandidata" />
+
             </items>
           </Menu>
           <Menu mnemonicParsing="true" text="_Help">
             <items>
-              <MenuItem mnemonicParsing="true" onAction="#helpOnAction" text="_Contact" />
+              <MenuItem mnemonicParsing="true" onAction="#helpOnAction" text="_Kontakt" />
             </items>
           </Menu>
         </menus>
